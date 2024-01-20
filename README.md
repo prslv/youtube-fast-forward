@@ -10,5 +10,5 @@
 
 ### Customize Your Viewing: Personalize your video experience by skipping intros, recaps, or any part you prefer.
 
-### Note
+## Note
 > If for some reason the buttons don't appear, a single page refresh should fix the issue.
