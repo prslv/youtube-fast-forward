@@ -1,4 +1,4 @@
-# Fast forward/backward buttons on YouTube
+# Fast forward/backward buttons on YouTube [Extension]
 
 ## Skip through content on YouTube without touching those pesky arrows with this free extension.
 
