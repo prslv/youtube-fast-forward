@@ -1,14 +1,13 @@
 {
   "manifest_version": 3,
   "name": "YouTube Fast Forward",
-  "version": "1.1",
-  "description": "Buttons to fast forward/backward videos by 10 seconds on YouTube.",
+  "version": "2.0",
+  "description": "Buttons to fast forward/backward videos on YouTube.",
   "permissions": [
     "activeTab",
     "storage",
     "scripting",
     "webNavigation",
-    "declarativeNetRequest",
     "declarativeContent"
   ],
   "action": {
@@ -29,13 +28,15 @@
       ]
     }
   ],
-  "background": {
-    "service_worker": "background.js"
-  },
   "web_accessible_resources": [
     {
       "resources": ["*.js", "*.css"],
       "matches": ["<all_urls>"]
     }
-  ]
+  ],
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  }
 }

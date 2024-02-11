@@ -3,168 +3,256 @@
 
 <head>
     <title>Fast Forward YouTube Extension</title>
-    <style>
-        body {
-            width: 440px;
-            margin: 0;
-            background: linear-gradient(45deg, #c6ebfa, #cfe0ff8c, #f5e7e8);
-        }
-
-        body a {
-            color: rgb(0, 143, 226);
-            text-decoration: none;
-        }
-
-        body a:hover {
-            color: rgb(68, 0, 255);
-            text-decoration: underline;
-        }
-
-        html::-webkit-scrollbar {
-            display: none;
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        .extensions-reppuddle {
-            height: fit-content;
-            display: flex;
-            margin: 0;
-            padding: 0;
-            background: #ffdf00;
-        }
-
-        .extensions-reppuddle:hover {
-            background: #f3d300;
-        }
-
-        .qr-hvr:hover {
-            filter: invert();
-            
-            scale:1.05
-        }
-.qr-hvr {
-    transition: .15s;
-}
-        .dim-hvr {
-            position: relative;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <div style="background-color: #f00;width:100%;height:auto">
-        <h2 style="display: flex;margin: 0;padding: 5px;justify-content: center;">
-            <img src="ff_header.svg" height="45">
+    <div style="
+    background: radial-gradient(#de0606, #750000d6);
+    width: 100%;
+    height: auto;
+    border-bottom: 1px solid #3f484a;">
+        <h2 style="display: flex;margin: 0;padding: 7px;justify-content: center;">
+            <img src="images/ff_header.svg" height="45">
         </h2>
     </div>
-
-
-    <div style="padding:10px;padding-top:0;">
-        <h1>Thank you for using my extension!</h1>
-        <div style="
-    display: flex;
-">
-            <div>
-                <div>
-                    <!-- Add radio buttons to choose skip time -->
-                    <h2>Skip Time:</h2>
-                    <label><input type="radio" name="skip-time" value="5"> 5 seconds</label>
-                    <label><input type="radio" name="skip-time" value="10"checked> 10 seconds</label>
-                    <label><input type="radio" name="skip-time" value="15"> 15 seconds</label>
-                </div>
-            <br>
-                <h2>You can support me on BMC by scanning the QR code,
-                    <a href="https://www.buymeacoffee.com/preslav" target="_blank"> or visit the page directly<svg
-                            fill="black" xmlns="http://www.w3.org/2000/svg" width="17px" height="15px"
-                            viewBox="0 0 52 52" enable-background="new 0 0 52 52" xml:space="preserve" style="
-            margin-left: 5px;
-        ">
-                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"
-                                stroke="var(--lighter-color)" stroke-width="0.350"></g>
-                            <g id="SVGRepo_iconCarrier">
-                                <g>
-                                    <path
-                                        d="M48.7,2H29.6C28.8,2,28,2.5,28,3.3v3C28,7.1,28.7,8,29.6,8h7.9c0.9,0,1.4,1,0.7,1.6l-17,17 c-0.6,0.6-0.6,1.5,0,2.1l2.1,2.1c0.6,0.6,1.5,0.6,2.1,0l17-17c0.6-0.6,1.6-0.2,1.6,0.7v7.9c0,0.8,0.8,1.7,1.6,1.7h2.9 c0.8,0,1.5-0.9,1.5-1.7v-19C50,2.5,49.5,2,48.7,2z">
-                                    </path>
-                                    <path
-                                        d="M36.3,25.5L32.9,29c-0.6,0.6-0.9,1.3-0.9,2.1v11.4c0,0.8-0.7,1.5-1.5,1.5h-21C8.7,44,8,43.3,8,42.5v-21 C8,20.7,8.7,20,9.5,20H21c0.8,0,1.6-0.3,2.1-0.9l3.4-3.4c0.6-0.6,0.2-1.7-0.7-1.7H6c-2.2,0-4,1.8-4,4v28c0,2.2,1.8,4,4,4h28 c2.2,0,4-1.8,4-4V26.2C38,25.3,36.9,24.9,36.3,25.5z">
-                                    </path>
-                                </g>
-                            </g>
-                        </svg></a>
-                </h2>
-                <h2>Or directly on <a href="https://paypal.me/prslv" target="_blank">paypal.me<svg fill="black"
-                            xmlns="http://www.w3.org/2000/svg" width="17px" height="15px" viewBox="0 0 52 52"
-                            enable-background="new 0 0 52 52" xml:space="preserve" style="
-    margin-left: 5px;
-">
-                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"
-                                stroke="var(--lighter-color)" stroke-width="0.350"></g>
-                            <g id="SVGRepo_iconCarrier">
-                                <g>
-                                    <path
-                                        d="M48.7,2H29.6C28.8,2,28,2.5,28,3.3v3C28,7.1,28.7,8,29.6,8h7.9c0.9,0,1.4,1,0.7,1.6l-17,17 c-0.6,0.6-0.6,1.5,0,2.1l2.1,2.1c0.6,0.6,1.5,0.6,2.1,0l17-17c0.6-0.6,1.6-0.2,1.6,0.7v7.9c0,0.8,0.8,1.7,1.6,1.7h2.9 c0.8,0,1.5-0.9,1.5-1.7v-19C50,2.5,49.5,2,48.7,2z">
-                                    </path>
-                                    <path
-                                        d="M36.3,25.5L32.9,29c-0.6,0.6-0.9,1.3-0.9,2.1v11.4c0,0.8-0.7,1.5-1.5,1.5h-21C8.7,44,8,43.3,8,42.5v-21 C8,20.7,8.7,20,9.5,20H21c0.8,0,1.6-0.3,2.1-0.9l3.4-3.4c0.6-0.6,0.2-1.7-0.7-1.7H6c-2.2,0-4,1.8-4,4v28c0,2.2,1.8,4,4,4h28 c2.2,0,4-1.8,4-4V26.2C38,25.3,36.9,24.9,36.3,25.5z">
-                                    </path>
-                                </g>
-                            </g>
-                        </svg></a></h2>
-            </div>
-            <a class="dim-hvr" href="https://paypal.me/prslv" target="_blank">
-                <img src="bmc_qrb.png" style="
-    position: absolute;
-    padding: 10px;
-    pointer-events: none;
-    z-index: 1;
-" width="150">
-                <img class="qr-hvr" width="150" src="bmc_qr.png" style="padding: 10px;border-radius: 22px;">
-            </a>
+    <form id="skipTimeForm">
+        <div id="warningOverlay" class="overlay">
+            <span>
+                <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                    <g id="SVGRepo_iconCarrier">
+                        <path
+                            d="M12 15H12.01M12 12V9M4.98207 19H19.0179C20.5615 19 21.5233 17.3256 20.7455 15.9923L13.7276 3.96153C12.9558 2.63852 11.0442 2.63852 10.2724 3.96153L3.25452 15.9923C2.47675 17.3256 3.43849 19 4.98207 19Z"
+                            stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </g>
+                </svg>
+                &nbsp; Not on a YouTube page
+            </span>
         </div>
 
-        <h3>Check out my other project: <a href="https://repuddle.com/" target="_blank">repuddle.com<svg fill="black"
-                    xmlns="http://www.w3.org/2000/svg" width="17px" height="15px" viewBox="0 0 52 52"
-                    enable-background="new 0 0 52 52" xml:space="preserve" style="
-    margin-left: 5px;
-">
-                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"
-                        stroke="var(--lighter-color)" stroke-width="0.350"></g>
-                    <g id="SVGRepo_iconCarrier">
-                        <g>
-                            <path
-                                d="M48.7,2H29.6C28.8,2,28,2.5,28,3.3v3C28,7.1,28.7,8,29.6,8h7.9c0.9,0,1.4,1,0.7,1.6l-17,17 c-0.6,0.6-0.6,1.5,0,2.1l2.1,2.1c0.6,0.6,1.5,0.6,2.1,0l17-17c0.6-0.6,1.6-0.2,1.6,0.7v7.9c0,0.8,0.8,1.7,1.6,1.7h2.9 c0.8,0,1.5-0.9,1.5-1.7v-19C50,2.5,49.5,2,48.7,2z">
+        <br>
+        <div class="skip-btns">
+            <div class="set-backward">
+                <label for="BskipTime">Backward</label>
+                <input type="number" id="BskipTime" name="BskipTime" value="10" min="1" max="99">
+            </div>
+            <br>
+            <div class="set-forward">
+                <label for="FskipTime">Forward</label>
+                <input type="number" id="FskipTime" name="FskipTime" value="10" min="1" max="99">
+            </div>
+        </div>
+        <button type="submit" id="status" class="dim-hvr">Save Changes</button>
+    </form>
+
+    <div class="support"><span id="support-btn">Support</span></div>
+    <div class="support-div">
+        <div style="padding:10px;background: #012c338f;">
+            <!-- <h1>Thank you for using my extension!</h1> -->
+            <div class="links">
+                <a style="background:white; color:black;" class="single" href="https://www.buymeacoffee.com/preslav"
+                    target="_blank">
+                    <p class="show">
+                        <span>buymeacoffee.com/preslav
+                            <svg style="margin-left: -1px;" fill="white" xmlns="http://www.w3.org/2000/svg" width="20px"
+                                height="11px" viewBox="0 0 52 52" enable-background="new 0 0 52 52"
+                                xml:space="preserve">
+                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke="white" stroke-width="0.150"></g>
+                                <g id="SVGRepo_iconCarrier">
+                                    <g>
+                                        <path
+                                            d="M48.7,2H29.6C28.8,2,28,2.5,28,3.3v3C28,7.1,28.7,8,29.6,8h7.9c0.9,0,1.4,1,0.7,1.6l-17,17 c-0.6,0.6-0.6,1.5,0,2.1l2.1,2.1c0.6,0.6,1.5,0.6,2.1,0l17-17c0.6-0.6,1.6-0.2,1.6,0.7v7.9c0,0.8,0.8,1.7,1.6,1.7h2.9 c0.8,0,1.5-0.9,1.5-1.7v-19C50,2.5,49.5,2,48.7,2z">
+                                        </path>
+                                        <path
+                                            d="M36.3,25.5L32.9,29c-0.6,0.6-0.9,1.3-0.9,2.1v11.4c0,0.8-0.7,1.5-1.5,1.5h-21C8.7,44,8,43.3,8,42.5v-21 C8,20.7,8.7,20,9.5,20H21c0.8,0,1.6-0.3,2.1-0.9l3.4-3.4c0.6-0.6,0.2-1.7-0.7-1.7H6c-2.2,0-4,1.8-4,4v28c0,2.2,1.8,4,4,4h28 c2.2,0,4-1.8,4-4V26.2C38,25.3,36.9,24.9,36.3,25.5z">
+                                        </path>
+                                    </g>
+                                </g>
+                            </svg>
+                        </span>
+                    </p>
+                    <img width="13" src="images/bmc.png" alt="buy me a coffee">
+                    Buy me a coffee
+                </a>
+
+                <a style="background:white; color:black;" class="single" href="https://paypal.me/prslv" target="_blank">
+                    <p class="show">
+                        <span>paypal.me/prslv
+                            <svg style="margin-left: -1px;" fill="white" xmlns="http://www.w3.org/2000/svg" width="20px"
+                                height="11px" viewBox="0 0 52 52" enable-background="new 0 0 52 52"
+                                xml:space="preserve">
+                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke="white" stroke-width="0.150"></g>
+                                <g id="SVGRepo_iconCarrier">
+                                    <g>
+                                        <path
+                                            d="M48.7,2H29.6C28.8,2,28,2.5,28,3.3v3C28,7.1,28.7,8,29.6,8h7.9c0.9,0,1.4,1,0.7,1.6l-17,17 c-0.6,0.6-0.6,1.5,0,2.1l2.1,2.1c0.6,0.6,1.5,0.6,2.1,0l17-17c0.6-0.6,1.6-0.2,1.6,0.7v7.9c0,0.8,0.8,1.7,1.6,1.7h2.9 c0.8,0,1.5-0.9,1.5-1.7v-19C50,2.5,49.5,2,48.7,2z">
+                                        </path>
+                                        <path
+                                            d="M36.3,25.5L32.9,29c-0.6,0.6-0.9,1.3-0.9,2.1v11.4c0,0.8-0.7,1.5-1.5,1.5h-21C8.7,44,8,43.3,8,42.5v-21 C8,20.7,8.7,20,9.5,20H21c0.8,0,1.6-0.3,2.1-0.9l3.4-3.4c0.6-0.6,0.2-1.7-0.7-1.7H6c-2.2,0-4,1.8-4,4v28c0,2.2,1.8,4,4,4h28 c2.2,0,4-1.8,4-4V26.2C38,25.3,36.9,24.9,36.3,25.5z">
+                                        </path>
+                                    </g>
+                                </g>
+                            </svg>
+                        </span>
+                    </p>
+                    <svg width="23px" height="25px" fill="#000000" xmlns="http://www.w3.org/2000/svg"
+                        aria-label="PayPal" role="img" viewBox="0 0 512 512">
+                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                        <g id="SVGRepo_iconCarrier">
+                            <rect width="512" height="512" rx="15%" fill="#ffffff"></rect>
+                            <path fill="#002c8a"
+                                d="M377 184.8L180.7 399h-72c-5 0-9-5-8-10l48-304c1-7 7-12 14-12h122c84 3 107 46 92 112z">
                             </path>
-                            <path
-                                d="M36.3,25.5L32.9,29c-0.6,0.6-0.9,1.3-0.9,2.1v11.4c0,0.8-0.7,1.5-1.5,1.5h-21C8.7,44,8,43.3,8,42.5v-21 C8,20.7,8.7,20,9.5,20H21c0.8,0,1.6-0.3,2.1-0.9l3.4-3.4c0.6-0.6,0.2-1.7-0.7-1.7H6c-2.2,0-4,1.8-4,4v28c0,2.2,1.8,4,4,4h28 c2.2,0,4-1.8,4-4V26.2C38,25.3,36.9,24.9,36.3,25.5z">
+                            <path fill="#009be1"
+                                d="M380.2 165c30 16 37 46 27 86-13 59-52 84-109 85l-16 1c-6 0-10 4-11 10l-13 79c-1 7-7 12-14 12h-60c-5 0-9-5-8-10l22-143c1-5 182-120 182-120z">
+                            </path>
+                            <path fill="#001f6b"
+                                d="M197 292l20-127a14 14 0 0 1 13-11h96c23 0 40 4 54 11-5 44-26 115-128 117h-44c-5 0-10 4-11 10z">
                             </path>
                         </g>
-                    </g>
-                </svg></a></h3>
+                    </svg>
+                    paypal.me
+                </a>
+
+                <a class="single" href="https://github.com/prslv/youtube-fast-forward" target="_blank">
+                    <p class="show">
+                        <span>github.com/prslv/youtube-fast-forward
+                            <svg style="margin-left: -1px;" fill="white" xmlns="http://www.w3.org/2000/svg" width="20px"
+                                height="11px" viewBox="0 0 52 52" enable-background="new 0 0 52 52"
+                                xml:space="preserve">
+                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke="white" stroke-width="0.150"></g>
+                                <g id="SVGRepo_iconCarrier">
+                                    <g>
+                                        <path
+                                            d="M48.7,2H29.6C28.8,2,28,2.5,28,3.3v3C28,7.1,28.7,8,29.6,8h7.9c0.9,0,1.4,1,0.7,1.6l-17,17 c-0.6,0.6-0.6,1.5,0,2.1l2.1,2.1c0.6,0.6,1.5,0.6,2.1,0l17-17c0.6-0.6,1.6-0.2,1.6,0.7v7.9c0,0.8,0.8,1.7,1.6,1.7h2.9 c0.8,0,1.5-0.9,1.5-1.7v-19C50,2.5,49.5,2,48.7,2z">
+                                        </path>
+                                        <path
+                                            d="M36.3,25.5L32.9,29c-0.6,0.6-0.9,1.3-0.9,2.1v11.4c0,0.8-0.7,1.5-1.5,1.5h-21C8.7,44,8,43.3,8,42.5v-21 C8,20.7,8.7,20,9.5,20H21c0.8,0,1.6-0.3,2.1-0.9l3.4-3.4c0.6-0.6,0.2-1.7-0.7-1.7H6c-2.2,0-4,1.8-4,4v28c0,2.2,1.8,4,4,4h28 c2.2,0,4-1.8,4-4V26.2C38,25.3,36.9,24.9,36.3,25.5z">
+                                        </path>
+                                    </g>
+                                </g>
+                            </svg>
+                        </span>
+                    </p>
+                    <svg width="21" height="18" viewBox="0 -0.5 24 24" id="meteor-icon-kit__solid-github" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                        <g id="SVGRepo_iconCarrier">
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M12.2047 0.00001C6.56031 -0.005731 1.74628 4.08615 0.842541 9.6577C-0.061195 15.2293 3.2126 20.6331 8.56941 22.4118C9.14823 22.5177 9.35294 22.1577 9.35294 21.8541C9.35294 21.5506 9.35294 20.8588 9.35294 19.8988C6.14117 20.5977 5.46353 18.3529 5.46353 18.3529C5.25046 17.6572 4.79779 17.0595 4.18588 16.6659C3.14823 15.96 4.27059 15.96 4.27059 15.96C5.00761 16.0641 5.65578 16.5014 6.02823 17.1459C6.34368 17.7179 6.87393 18.1406 7.50179 18.3208C8.12965 18.5009 8.8034 18.4236 9.37411 18.1059C9.41842 17.5252 9.66876 16.9794 10.08 16.5671C7.5247 16.2777 4.84235 15.2894 4.84235 10.92C4.82481 9.7786 5.24688 8.67412 6.02117 7.8353C5.67632 6.84285 5.71662 5.7571 6.13412 4.79295C6.13412 4.79295 7.10117 4.48236 9.29647 5.97177C11.1816 5.45419 13.1713 5.45419 15.0565 5.97177C17.2518 4.48236 18.2118 4.79295 18.2118 4.79295C18.6351 5.74689 18.6854 6.82486 18.3529 7.81412C19.1272 8.65294 19.5493 9.7574 19.5318 10.8988C19.5318 15.3177 16.8424 16.2847 14.28 16.5459C14.8359 17.1047 15.1218 17.8774 15.0635 18.6635C15.0635 20.2024 15.0635 21.4447 15.0635 21.8188C15.0635 22.1929 15.2682 22.4824 15.8541 22.3694C21.1473 20.5447 24.3569 15.1728 23.4554 9.6469C22.5539 4.1211 17.8034 0.04779 12.2047 0.00001z"
+                                fill="white"></path>
+                        </g>
+                    </svg>
+                    Github
+                </a>
+
+                <a class="single" href="https://repuddle.com" target="_blank">
+                    <p class="show">
+                        <span>repuddle.com
+                            <svg style="margin-left: -1px;" fill="white" xmlns="http://www.w3.org/2000/svg" width="20px"
+                                height="11px" viewBox="0 0 52 52" enable-background="new 0 0 52 52"
+                                xml:space="preserve">
+                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke="white" stroke-width="0.150"></g>
+                                <g id="SVGRepo_iconCarrier">
+                                    <g>
+                                        <path
+                                            d="M48.7,2H29.6C28.8,2,28,2.5,28,3.3v3C28,7.1,28.7,8,29.6,8h7.9c0.9,0,1.4,1,0.7,1.6l-17,17 c-0.6,0.6-0.6,1.5,0,2.1l2.1,2.1c0.6,0.6,1.5,0.6,2.1,0l17-17c0.6-0.6,1.6-0.2,1.6,0.7v7.9c0,0.8,0.8,1.7,1.6,1.7h2.9 c0.8,0,1.5-0.9,1.5-1.7v-19C50,2.5,49.5,2,48.7,2z">
+                                        </path>
+                                        <path
+                                            d="M36.3,25.5L32.9,29c-0.6,0.6-0.9,1.3-0.9,2.1v11.4c0,0.8-0.7,1.5-1.5,1.5h-21C8.7,44,8,43.3,8,42.5v-21 C8,20.7,8.7,20,9.5,20H21c0.8,0,1.6-0.3,2.1-0.9l3.4-3.4c0.6-0.6,0.2-1.7-0.7-1.7H6c-2.2,0-4,1.8-4,4v28c0,2.2,1.8,4,4,4h28 c2.2,0,4-1.8,4-4V26.2C38,25.3,36.9,24.9,36.3,25.5z">
+                                        </path>
+                                    </g>
+                                </g>
+                            </svg>
+                        </span>
+                    </p>
+                    <svg height="15" width="20" xmlns="http://www.w3.org/2000/svg" viewBox="15 0 68.71 77.85">
+                        <defs>
+                            <style>
+                                .cls-1 {
+                                    fill: white !important;
+                                }
+
+                                .cls-2 {
+                                    fill: #cf3000;
+                                }
+                            </style>
+                        </defs>
+                        <title>repuddle</title>
+                        <g id="Layer_2" data-name="Layer 2">
+                            <g id="Layer_2-2" data-name="Layer 2">
+                                <path class="cls-1"
+                                    d="M66.29,59.69c0-13.49-8.25-18.81-16-20.56,8.5-2.27,18.4-7.9,18.4-18.9,0-9.18,0-21.29-45.71-20.16v14c9.15.48,20.89.7,20.83,8.81,0,5.36-4.36,8.6-16.33,8.6H23l.86,16.27h0c15.85,0,18.38,3.77,18.38,10.65v2.06c0,8.19.53,14,2.61,17.4h23C66.53,74.4,66.29,68,66.29,63Z">
+                                </path>
+                                <path class="cls-2"
+                                    d="M26.51,64.68C21.86,59,0,62.61,0,62.61V77.85H27.5S28.83,67.5,26.51,64.68Z"></path>
+                                <g xmlns="http://www.w3.org/2000/svg" style="opacity:.8;">
+                                    <path
+                                        d="M76.38,68A12.44,12.44,0,0,1,77,63.64a5.15,5.15,0,0,1,1.85-2.51,5.48,5.48,0,0,1,5.6-.08,5,5,0,0,1,1.76,1.85,5.25,5.25,0,0,1,.7,2.27,7,7,0,0,1,.55-2.48,5,5,0,0,1,1.65-2.14,5,5,0,0,1,3-.86,6.23,6.23,0,0,1,3.21.82,5.62,5.62,0,0,1,2.23,2.64A12.11,12.11,0,0,1,98.42,68v9.84h-22Zm10.21,4.86-1.3,1.75v-5a4.93,4.93,0,0,0-.76-3,2.43,2.43,0,0,0-2-1,2.29,2.29,0,0,0-1.43.43,2.48,2.48,0,0,0-.82,1.25A6.77,6.77,0,0,0,80,69.3v5.88l-2.21-2.37ZM94.82,69A4.66,4.66,0,0,0,94,66.08a2.55,2.55,0,0,0-2.12-1,2.81,2.81,0,0,0-1.33.3,2.47,2.47,0,0,0-1,.84,3.84,3.84,0,0,0-.58,1.31,6.57,6.57,0,0,0-.21,1.71v5.33l-1.28-1.75H97l-2.21,2.37Z"
+                                        fill="#8c8c8c"></path>
+                                    <path
+                                        d="M80,53.17,77.76,50.8h9.13L85.57,52V42.75h3.59V52L87.84,50.8h9.21l-2.22,2.37V40.87h3.59V56.09h-22V40.87H80Z"
+                                        fill="#8c8c8c"></path>
+                                    <path d="M80,20.11v8.27l-2.21-2.11H98.42v5.25H77.76L80,29.34v8.32H76.38V20.11Z"
+                                        fill="#8c8c8c"></path>
+                                    <path
+                                        d="M98.42,20.79,76.35,14.54V6.21L98.42,0V5.4l-19.24,5v0l19.24,5Zm-5.11-4.48H89.69V4.43h3.62Z"
+                                        fill="#8c8c8c"></path>
+                                </g>
+                            </g>
+                        </g>
+                    </svg>
+                    repuddle
+                </a>
+            </div>
+            <div class="links">
+                <a style="background:white;color:black;width: 336px;" class="single"
+                    href="https://chromewebstore.google.com/detail/youtube-fast-forward/pknkmgaijamjmeeglhmgkpfgbkogkbob"
+                    target="_blank">
+                    <p class="show">
+                        <span>chromewebstore.google.com/youtube-fast-forward
+                            <svg style="margin-left: -1px;" fill="white" xmlns="http://www.w3.org/2000/svg" width="20px"
+                                height="11px" viewBox="0 0 52 52" enable-background="new 0 0 52 52"
+                                xml:space="preserve">
+                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke="white" stroke-width="0.150"></g>
+                                <g id="SVGRepo_iconCarrier">
+                                    <g>
+                                        <path
+                                            d="M48.7,2H29.6C28.8,2,28,2.5,28,3.3v3C28,7.1,28.7,8,29.6,8h7.9c0.9,0,1.4,1,0.7,1.6l-17,17 c-0.6,0.6-0.6,1.5,0,2.1l2.1,2.1c0.6,0.6,1.5,0.6,2.1,0l17-17c0.6-0.6,1.6-0.2,1.6,0.7v7.9c0,0.8,0.8,1.7,1.6,1.7h2.9 c0.8,0,1.5-0.9,1.5-1.7v-19C50,2.5,49.5,2,48.7,2z">
+                                        </path>
+                                        <path
+                                            d="M36.3,25.5L32.9,29c-0.6,0.6-0.9,1.3-0.9,2.1v11.4c0,0.8-0.7,1.5-1.5,1.5h-21C8.7,44,8,43.3,8,42.5v-21 C8,20.7,8.7,20,9.5,20H21c0.8,0,1.6-0.3,2.1-0.9l3.4-3.4c0.6-0.6,0.2-1.7-0.7-1.7H6c-2.2,0-4,1.8-4,4v28c0,2.2,1.8,4,4,4h28 c2.2,0,4-1.8,4-4V26.2C38,25.3,36.9,24.9,36.3,25.5z">
+                                        </path>
+                                    </g>
+                                </g>
+                            </svg>
+                        </span>
+                    </p>
+                    <img width="13" src="images/cws.png" alt="buy me a coffee">Open in the Chrome Web Store
+                </a>
+            </div>
+        </div>
+
+        <a class="extensions-reppuddle" href="https://repuddle.com/extensions/youtube-fast-forward" target="_blank">
+            <img height="40" src="images/extensions_by_repuddle_1.svg" style="margin: auto;width: 100%;padding: 10px;">
+        </a>
     </div>
-    <a class="extensions-reppuddle" href="https://repuddle.com/extensions" target="_blank">
-        <img height="65" src="extensions_by_repuddle.svg" style="margin: auto;width: 100%;padding: 10px;">
-    </a>
-    <script>
-        const radioButtons = document.querySelectorAll('input[name="skip-time"]');
-        radioButtons.forEach((radioButton) => {
-          radioButton.addEventListener("change", function () {
-            const skipTime = this.value;
-            chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-              chrome.tabs.sendMessage(tabs[0].id, { skipTime }, function (response) {
-                console.log(response.message);
-              });
-            });
-          });
-        });
-      </script>
     <script src="content.js"></script>
+    <script src="popup.js"></script>
 </body>
 
 </html>
