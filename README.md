@@ -1,6 +1,6 @@
 # [Extension] Fast forward/backward buttons on YouTube
 
-![image](https://github.com/prslv/youtube-fast-forward/assets/104658946/44dd7306-1b9d-4cda-91b4-edfc4d448397)
+![image](https://github.com/prslv/youtube-fast-forward/assets/104658946/98d3407a-aff7-4255-8338-928365e09ca2)
 
 Enhance your YouTube experience with YouTube Fast Forward! This extension adds customizable fast forward and rewind buttons right into the YouTube player, seamlessly fitting with the look and feel of the site.
 
