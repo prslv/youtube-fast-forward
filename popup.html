@@ -7,6 +7,7 @@
 </head>
 
 <body>
+    <span class="version">v2.0</span>
     <div style="
     background: radial-gradient(#de0606, #750000d6);
     width: 100%;
@@ -36,20 +37,26 @@
         <div class="skip-btns">
             <div class="set-backward">
                 <label for="BskipTime">Backward</label>
-                <input type="number" id="BskipTime" name="BskipTime" value="10" min="1" max="99">
+                <input type="number" id="BskipTime" name="BskipTime" value="10" min="1" max="99" maxlength="2">
             </div>
             <br>
             <div class="set-forward">
                 <label for="FskipTime">Forward</label>
-                <input type="number" id="FskipTime" name="FskipTime" value="10" min="1" max="99">
+                <input type="number" id="FskipTime" name="FskipTime" value="10" min="1" max="99" maxlength="2">
             </div>
         </div>
         <button type="submit" id="status" class="dim-hvr">Save Changes</button>
     </form>
 
-    <div class="support"><span id="support-btn">Support</span></div>
-    <div class="support-div">
-        <div style="padding:10px;background: #012c338f;">
+    <div class="expand-wrap">
+        <span id="expand-btn">
+            <svg class="expand-svg" width="22px" height="16px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" transform="rotate(-90)"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> 
+                <path d="M15 6L9 12L15 18" stroke="grey" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+            <span class="show-text">Show</span>links
+        </span>
+    </div>
+    <div class="expand-div">
+        <div style="padding:10px;background: #e1e1e15c;">
             <!-- <h1>Thank you for using my extension!</h1> -->
             <div class="links">
                 <a style="background:white; color:black;" class="single" href="https://www.buymeacoffee.com/preslav"
@@ -246,7 +253,16 @@
                 </a>
             </div>
         </div>
-
+        <div class="rating-wrap">
+            <div class="rating">
+                <a href="https://chromewebstore.google.com/detail/youtube-fast-forward/pknkmgaijamjmeeglhmgkpfgbkogkbob/reviews" target="_blank" class="star" data-value="1">&#9733;</a>
+                <a href="https://chromewebstore.google.com/detail/youtube-fast-forward/pknkmgaijamjmeeglhmgkpfgbkogkbob/reviews" target="_blank" class="star" data-value="2">&#9733;</a>
+                <a href="https://chromewebstore.google.com/detail/youtube-fast-forward/pknkmgaijamjmeeglhmgkpfgbkogkbob/reviews" target="_blank" class="star" data-value="3">&#9733;</a>
+                <a href="https://chromewebstore.google.com/detail/youtube-fast-forward/pknkmgaijamjmeeglhmgkpfgbkogkbob/reviews" target="_blank" class="star" data-value="4">&#9733;</a>
+                <a href="https://chromewebstore.google.com/detail/youtube-fast-forward/pknkmgaijamjmeeglhmgkpfgbkogkbob/reviews" target="_blank" class="star" data-value="5">&#9733;</a>
+            </div>
+        </div>
+          
         <a class="extensions-reppuddle" href="https://repuddle.com/extensions/youtube-fast-forward" target="_blank">
             <img height="40" src="images/extensions_by_repuddle_1.svg" style="margin: auto;width: 100%;padding: 10px;">
         </a>
