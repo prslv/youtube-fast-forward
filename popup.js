@@ -60,9 +60,6 @@ function updateStars() {
         });
     }
 }
-//
-
-//
 updateStars();
 //
 
@@ -187,7 +184,14 @@ function setDefaultSkipTimes() {
 chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
     const tab = tabs[0];
     const isYoutubePage = tab && tab.url.includes("youtube.com");
-    if (!isYoutubePage) {
+    if (isYoutubePage) {
+        chrome.tabs.sendMessage(tab.id, { action: "checkLocalStorage" }, function(response) {
+            if (response && response.BskipTimeFromYouTube && response.FskipTimeFromYouTube) {
+                document.getElementById("BskipTime").value = response.BskipTimeFromYouTube;
+                document.getElementById("FskipTime").value = response.FskipTimeFromYouTube;
+            }
+        });
+    } else {
         toggleWarningOverlay(true);
         document.getElementById("skipTimeForm").classList.add("not-on-youtube");
     }

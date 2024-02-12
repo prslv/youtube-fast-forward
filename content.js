@@ -1,5 +1,13 @@
 let buttonsInjected = false;
 
+chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
+  let BskipTime = parseFloat(localStorage.getItem("BskipTime")) || 10;
+  let FskipTime = parseFloat(localStorage.getItem("FskipTime")) || 10;
+  if (message.action === "checkLocalStorage") {
+    sendResponse({ BskipTimeFromYouTube: BskipTime, FskipTimeFromYouTube: FskipTime });
+  }
+});
+
 function injectButtons() {
   const videoPlayer = document.querySelector("video.html5-main-video");
   let BskipTime = parseFloat(localStorage.getItem("BskipTime")) || 10;
