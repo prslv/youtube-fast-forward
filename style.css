@@ -22,26 +22,26 @@ html::-webkit-scrollbar {
     display: none;
 }
 
+.version {
+    position: absolute;
+    color: #ffffff4a;
+    right: 4px;
+}
+
+.version:hover {
+    color: gainsboro;
+}
+
 .extensions-reppuddle {
     height: fit-content;
     display: flex;
     margin: 0;
     padding: 0;
-    /* background: #ffdf00; */
+    background: #ffdf00;
 }
 
 .extensions-reppuddle:hover {
-    background: #f3d300;
-}
-
-.qr-hvr:hover {
-    filter: invert();
-
-    scale: 1.05
-}
-
-.qr-hvr {
-    transition: .15s;
+    background: #f3d300da;
 }
 
 .dim-hvr {
@@ -124,7 +124,7 @@ form {
     /* background: linear-gradient(45deg, #f5b3b333, #d9bbef45); */
     /* background: #121314; */
     background: linear-gradient(360deg, #000000, #2e0101);
-    padding-bottom: 25px;
+    padding-bottom: 10px;
     position: relative;
 }
 
@@ -247,27 +247,81 @@ form button {
     background: #444444 !important;
     color: white !important;
 }
-.support {
+
+.show-text {
+    padding: 0 !important;
+    margin: 0 3px 0 0 !important;
+}
+
+.expand-wrap {
     display: flex;
     background: black;
     color: grey;
     justify-content: flex-end;
 }
-.support span {
-    padding:3px 6px;
-    margin-bottom:4px;
-    margin-right:4px;
+
+.expand-wrap span {
+    display: flex;
+    align-items: center;
+    padding: 3px 6px;
+    margin-bottom: 4px;
+    margin-right: 4px;
     cursor: pointer;
+    user-select: none;
 }
-.support span:hover {
+
+.expand-wrap span:hover,
+.expanded {
     color: white;
 }
-.support-div {
-    height:0px;
-    overflow: hidden;
-    transition: height .3s ease;
+
+.expand-wrap span:hover path,
+.expanded path {
+    stroke: white;
 }
+
+#expand-btn {
+    width: 75px;
+}
+
+.expand-div {
+    height: 0px;
+    overflow: hidden;
+    /* transition: height .3s ease; */
+}
+
 .expand {
-    height:100%;
     overflow: visible;
+}
+
+.rating-wrap {
+    background: black;
+}
+
+.rating {
+    display: flex;
+    justify-content: center;
+    height: 42px;
+    font-size: 28px;
+    margin: 0 auto;
+    width: fit-content;
+}
+
+.star {
+    cursor: pointer;
+    color: gray;
+}
+
+.selected {
+    color: #ffdf00;
+}
+
+.rating:hover .selected {
+    color: gray;
+}
+
+.star:hover,
+.star.hovered {
+    color: #ffdf00 !important;
+    text-decoration: none;
 }
