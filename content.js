@@ -59,7 +59,7 @@ function injectButtons() {
     }
 
     const svgIcon = `
-    <svg style="margin:auto;" height="25" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80.87 58.01"><defs><style>.cls-1{fill:#fff;}</style></defs><title>right</title><g id="Layer_2" data-name="Layer 2"><g id="Layer_2-2" data-name="Layer 2">
+    <svg style="margin:auto;padding-bottom:3px;" height="25" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80.87 58.01"><defs><style>.cls-1{fill:#fff;}</style></defs><title>right</title><g id="Layer_2" data-name="Layer 2"><g id="Layer_2-2" data-name="Layer 2">
       <text class="f-icon-text" x="`+ FvisualFill + `" y="80%" dominant-baseline="middle" text-anchor="start" fill="black" style="
         font-size: 3.6em;
         font-weight: bold;
@@ -80,7 +80,7 @@ function injectButtons() {
     fastBackwardButtonContainer.style.margin = "auto 5px auto 10px";
 
     const svgIconBackward = `
-    <svg style="margin:auto;" height="25" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80.87 58.01"><defs><style>.cls-1{fill:#fff;}</style></defs><title>left</title><g id="Layer_2" data-name="Layer 2"><g id="Layer_2-2" data-name="Layer 2"> 
+    <svg style="margin:auto;padding-bottom:3px;" height="25" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80.87 58.01"><defs><style>.cls-1{fill:#fff;}</style></defs><title>left</title><g id="Layer_2" data-name="Layer 2"><g id="Layer_2-2" data-name="Layer 2"> 
       <text class="b-icon-text" x="`+ BvisualFill + `" y="80%"  text-anchor="end" dominant-baseline="middle" fill="black" style="
         font-size: 3.6em;
         font-weight: bold;
