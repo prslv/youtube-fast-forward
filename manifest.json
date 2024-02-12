@@ -9,7 +9,10 @@
     "scripting",
     "webNavigation",
     "declarativeContent"
-  ],
+  ], 
+  "background": {
+    "service_worker": "background.js"
+  },
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
@@ -30,7 +33,7 @@
   ],
   "web_accessible_resources": [
     {
-      "resources": ["*.js", "*.css"],
+      "resources": ["*.js", "*.css", "whatsnew.html"],
       "matches": ["<all_urls>"]
     }
   ],
