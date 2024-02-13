@@ -69,10 +69,11 @@ function injectButtons() {
     const svgIcon = `
     <svg style="margin:auto;padding-bottom:3px;" height="25" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80.87 58.01"><defs><style>.cls-1{fill:#fff;}</style></defs><title>right</title><g id="Layer_2" data-name="Layer 2"><g id="Layer_2-2" data-name="Layer 2">
       <text class="f-icon-text" x="`+ FvisualFill + `" y="80%" dominant-baseline="middle" text-anchor="start" fill="black" style="
-        font-size: 3.6em;
+        font-size: 30pt;
         font-weight: bold;
         font-family: sans-serif;
         fill: white;
+        user-select:none;
         ">`+ FskipTime + `</text>
       <path class="cls-1" d="M60.88.72,59.44,0V7.61H0V58H14.32V51.56H6.68V13.83H59.44v7.6L80.87,10.72Z"/></g></g>
     </svg>
@@ -90,10 +91,11 @@ function injectButtons() {
     const svgIconBackward = `
     <svg style="margin:auto;padding-bottom:3px;" height="25" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80.87 58.01"><defs><style>.cls-1{fill:#fff;}</style></defs><title>left</title><g id="Layer_2" data-name="Layer 2"><g id="Layer_2-2" data-name="Layer 2"> 
       <text class="b-icon-text" x="`+ BvisualFill + `" y="80%"  text-anchor="end" dominant-baseline="middle" fill="black" style="
-        font-size: 3.6em;
+        font-size: 30pt;
         font-weight: bold;
         font-family: sans-serif;
         fill: white;
+        user-select:none;
         ">`+ BskipTime + `</text>
       <path class="cls-1" d="M21.43,7.61V0L0,10.72,21.43,21.43v-7.6H74.19V51.56H66.55V58H80.87V7.61Z"></path></g></g>
     </svg>`;
