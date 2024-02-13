@@ -33,7 +33,7 @@
   ],
   "web_accessible_resources": [
     {
-      "resources": ["*.js", "*.css", "whatsnew.html"],
+      "resources": ["*.js", "*.css", "https://repuddle.com/extensions/updates/latest/youtube-fast-forward"],
       "matches": ["<all_urls>"]
     }
   ],
