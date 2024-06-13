@@ -7,17 +7,13 @@
 </head>
 
 <body>
-    <span class="version">v2.0</span>
-    <div style="
-    background: radial-gradient(#de0606, #750000d6);
-    width: 100%;
-    height: auto;
-    border-bottom: 1px solid #3f484a;">
+    <span class="version">v2.1</span>
+    <div class="header">
         <h2 style="display: flex;margin: 0;padding: 7px;justify-content: center;">
             <img src="images/ff_header.svg" height="45">
         </h2>
     </div>
-    <form id="skipTimeForm">
+    <div class="setting-body">
         <div id="warningOverlay" class="overlay">
             <span>
                 <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -32,26 +28,105 @@
                 &nbsp; Not on a YouTube page
             </span>
         </div>
-
-        <br>
-        <div class="skip-btns">
-            <div class="set-backward">
-                <label for="BskipTime">Backward</label>
-                <input type="number" id="BskipTime" name="BskipTime" value="10" min="1" max="99" maxlength="2">
+        <button id="refreshButton">
+            <svg width="17px" height="17px" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                <g id="SVGRepo_iconCarrier">
+                    <path
+                        d="M14.9547098,7.98576084 L15.0711,7.99552 C15.6179,8.07328 15.9981,8.57957 15.9204,9.12636 C15.6826,10.7983 14.9218,12.3522 13.747,13.5654 C12.5721,14.7785 11.0435,15.5888 9.37999,15.8801 C7.7165,16.1714 6.00349,15.9288 4.48631,15.187 C3.77335,14.8385 3.12082,14.3881 2.5472,13.8537 L1.70711,14.6938 C1.07714,15.3238 3.55271368e-15,14.8776 3.55271368e-15,13.9867 L3.55271368e-15,9.99998 L3.98673,9.99998 C4.87763,9.99998 5.3238,11.0771 4.69383,11.7071 L3.9626,12.4383 C4.38006,12.8181 4.85153,13.1394 5.36475,13.3903 C6.50264,13.9466 7.78739,14.1285 9.03501,13.9101 C10.2826,13.6916 11.4291,13.0839 12.3102,12.174 C13.1914,11.2641 13.762,10.0988 13.9403,8.84476 C14.0181,8.29798 14.5244,7.91776 15.0711,7.99552 L14.9547098,7.98576084 Z M11.5137,0.812976 C12.2279,1.16215 12.8814,1.61349 13.4558,2.14905 L14.2929,1.31193 C14.9229,0.681961 16,1.12813 16,2.01904 L16,6.00001 L12.019,6.00001 C11.1281,6.00001 10.6819,4.92287 11.3119,4.29291 L12.0404,3.56441 C11.6222,3.18346 11.1497,2.86125 10.6353,2.60973 C9.49736,2.05342 8.21261,1.87146 6.96499,2.08994 C5.71737,2.30841 4.57089,2.91611 3.68976,3.82599 C2.80862,4.73586 2.23802,5.90125 2.05969,7.15524 C1.98193,7.70202 1.47564,8.08224 0.928858,8.00448 C0.382075,7.92672 0.00185585,7.42043 0.0796146,6.87364 C0.31739,5.20166 1.07818,3.64782 2.25303,2.43465 C3.42788,1.22148 4.95652,0.411217 6.62001,0.119916 C8.2835,-0.171384 9.99651,0.0712178 11.5137,0.812976 Z">
+                    </path>
+                </g>
+            </svg>
+        </button>
+        <div class="settings-menu">
+            <div id="openSettingsMenu" class="settingsButton">
+                <svg width="20px" height="20px" viewBox="-0.5 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                    <g id="SVGRepo_iconCarrier">
+                        <path d="M12 7.82001H22" stroke="#dfdfdf" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round"></path>
+                        <path d="M2 7.82001H4" stroke="#dfdfdf" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round"></path>
+                        <path d="M20 16.82H22" stroke="#dfdfdf" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round"></path>
+                        <path d="M2 16.82H12" stroke="#dfdfdf" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round"></path>
+                        <path
+                            d="M8 11.82C10.2091 11.82 12 10.0291 12 7.82001C12 5.61087 10.2091 3.82001 8 3.82001C5.79086 3.82001 4 5.61087 4 7.82001C4 10.0291 5.79086 11.82 8 11.82Z"
+                            stroke="#dfdfdf" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <path
+                            d="M16 20.82C18.2091 20.82 20 19.0291 20 16.82C20 14.6109 18.2091 12.82 16 12.82C13.7909 12.82 12 14.6109 12 16.82C12 19.0291 13.7909 20.82 16 20.82Z"
+                            stroke="#dfdfdf" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </g>
+                </svg>
             </div>
-            <br>
-            <div class="set-forward">
-                <label for="FskipTime">Forward</label>
-                <input type="number" id="FskipTime" name="FskipTime" value="10" min="1" max="99" maxlength="2">
+            <div id="closeSettingsMenu" style="display: none;" class="settingsButton">
+                <svg width="18px" height="18px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                    <g id="SVGRepo_iconCarrier">
+                        <path
+                            d="M20.7457 3.32851C20.3552 2.93798 19.722 2.93798 19.3315 3.32851L12.0371 10.6229L4.74275 3.32851C4.35223 2.93798 3.71906 2.93798 3.32854 3.32851C2.93801 3.71903 2.93801 4.3522 3.32854 4.74272L10.6229 12.0371L3.32856 19.3314C2.93803 19.722 2.93803 20.3551 3.32856 20.7457C3.71908 21.1362 4.35225 21.1362 4.74277 20.7457L12.0371 13.4513L19.3315 20.7457C19.722 21.1362 20.3552 21.1362 20.7457 20.7457C21.1362 20.3551 21.1362 19.722 20.7457 19.3315L13.4513 12.0371L20.7457 4.74272C21.1362 4.3522 21.1362 3.71903 20.7457 3.32851Z"
+                            fill="#dfdfdf"></path>
+                    </g>
+                </svg>
             </div>
         </div>
-        <button type="submit" id="status" class="dim-hvr">Save Changes</button>
-    </form>
+        <div id="settingsMenu" style="display: none;color:white">
+            <div class="settingsMenuInner">
+                <div>
+                    <div class="control-group">
+                        <label for="triggerFFDelayInput">Trigger delay (ms):</label>
+                        &nbsp;
+                        <input type="number" id="triggerFFDelayInput" min="10" max="3000" step="10">
+                        <button id="increaseTriggerFFDelay">+</button>
+                        <button id="decreaseTriggerFFDelay">-</button>
+                    </div>
+                    <p>Set the delay to begin seeking through.</p>
+                    <p>Min: 10ms, Max: 3000ms (3seconds)</p>
+                </div>
+                <div>
+                    <div class="control-group">
+                        <label for="throttleFFDelaySlider">Throttle delay (ms):</label>
+                        &nbsp;
+                        <input type="range" id="throttleFFDelaySlider" min="100" max="1000" step="10">
+                        <span id="throttleFFDelayValue"></span>
+                    </div>
+                    <p>Set the delay between each seek through event.</p>
+                </div>
+
+            </div>
+        </div>
+        <form id="skipTimeForm">
+            <br>
+            <div class="skip-btns">
+                <div class="set-backward">
+                    <label for="BskipTime">Backward</label>
+                    <input type="number" id="BskipTime" name="BskipTime" value="10" min="1" max="99" maxlength="2">
+                </div>
+                <br>
+                <div class="set-forward">
+                    <label for="FskipTime">Forward</label>
+                    <input type="number" id="FskipTime" name="FskipTime" value="10" min="1" max="99" maxlength="2">
+                </div>
+            </div>
+            <button type="submit" id="status" class="dim-hvr">Save Changes</button>
+        </form>
+    </div>
 
     <div class="expand-wrap">
         <span id="expand-btn">
-            <svg class="expand-svg" width="22px" height="16px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" transform="rotate(-90)"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> 
-                <path d="M15 6L9 12L15 18" stroke="grey" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+            <svg class="expand-svg" width="22px" height="16px" viewBox="0 0 24 24" fill="none"
+                xmlns="http://www.w3.org/2000/svg" transform="rotate(-90)">
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                <g id="SVGRepo_iconCarrier">
+                    <path d="M15 6L9 12L15 18" stroke="grey" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round"></path>
+                </g>
+            </svg>
             <span class="show-text">Show</span>links
         </span>
     </div>
@@ -255,14 +330,19 @@
         </div>
         <div class="rating-wrap">
             <div class="rating">
-                <a href="https://chromewebstore.google.com/detail/youtube-fast-forward/pknkmgaijamjmeeglhmgkpfgbkogkbob/reviews" target="_blank" class="star" data-value="1">&#9733;</a>
-                <a href="https://chromewebstore.google.com/detail/youtube-fast-forward/pknkmgaijamjmeeglhmgkpfgbkogkbob/reviews" target="_blank" class="star" data-value="2">&#9733;</a>
-                <a href="https://chromewebstore.google.com/detail/youtube-fast-forward/pknkmgaijamjmeeglhmgkpfgbkogkbob/reviews" target="_blank" class="star" data-value="3">&#9733;</a>
-                <a href="https://chromewebstore.google.com/detail/youtube-fast-forward/pknkmgaijamjmeeglhmgkpfgbkogkbob/reviews" target="_blank" class="star" data-value="4">&#9733;</a>
-                <a href="https://chromewebstore.google.com/detail/youtube-fast-forward/pknkmgaijamjmeeglhmgkpfgbkogkbob/reviews" target="_blank" class="star" data-value="5">&#9733;</a>
+                <a href="https://chromewebstore.google.com/detail/youtube-fast-forward/pknkmgaijamjmeeglhmgkpfgbkogkbob/reviews"
+                    target="_blank" class="star" data-value="1">&#9733;</a>
+                <a href="https://chromewebstore.google.com/detail/youtube-fast-forward/pknkmgaijamjmeeglhmgkpfgbkogkbob/reviews"
+                    target="_blank" class="star" data-value="2">&#9733;</a>
+                <a href="https://chromewebstore.google.com/detail/youtube-fast-forward/pknkmgaijamjmeeglhmgkpfgbkogkbob/reviews"
+                    target="_blank" class="star" data-value="3">&#9733;</a>
+                <a href="https://chromewebstore.google.com/detail/youtube-fast-forward/pknkmgaijamjmeeglhmgkpfgbkogkbob/reviews"
+                    target="_blank" class="star" data-value="4">&#9733;</a>
+                <a href="https://chromewebstore.google.com/detail/youtube-fast-forward/pknkmgaijamjmeeglhmgkpfgbkogkbob/reviews"
+                    target="_blank" class="star" data-value="5">&#9733;</a>
             </div>
         </div>
-          
+
         <a class="extensions-reppuddle" href="https://repuddle.com/extensions/youtube-fast-forward" target="_blank">
             <img height="40" src="images/extensions_by_repuddle_1.svg" style="margin: auto;width: 100%;padding: 10px;">
         </a>

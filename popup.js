@@ -165,15 +165,21 @@ function saveSkipTimes(event) {
     const BskipTime = parseFloat(document.getElementById("BskipTime").value);
     const FskipTime = parseFloat(document.getElementById("FskipTime").value);
 
-    chrome.storage.local.set({ "BskipTime": BskipTime, "FskipTime": FskipTime }, function () {
-        const status = document.getElementById("status");
-
-        status.textContent = 'Chanes Saved';
-        setTimeout(function () {
-            status.textContent = 'Save Changes';
-        }, 1550);
+    chrome.storage.local.set({
+        "BskipTime": BskipTime,
+        "FskipTime": FskipTime
+    }, function () {
+        // Check for errors
+        if (chrome.runtime.lastError) {
+            console.error("Error storing values in local storage:", chrome.runtime.lastError);
+        } else {
+            const status = document.getElementById("status");
+            status.textContent = 'Chanes Saved';
+            setTimeout(function () {
+                status.textContent = 'Save Changes';
+            }, 1550);
+        }
     });
-
     chrome.tabs.query({}, function (tabs) {
         tabs.forEach(tab => {
             chrome.tabs.sendMessage(tab.id, { BskipTime: BskipTime, FskipTime: FskipTime }).catch(error => { });
@@ -183,11 +189,152 @@ function saveSkipTimes(event) {
 //
 
 //
-chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
-    if (message.BskipTimeFromYouTube || message.FskipTimeFromYouTube) {
-        chrome.storage.local.set({ "BskipTime": message.BskipTimeFromYouTube, "FskipTime": message.FskipTimeFromYouTube });
-        document.getElementById("BskipTime").value = message.BskipTimeFromYouTube || 10;
-        document.getElementById("FskipTime").value = message.FskipTimeFromYouTube || 10;
+document.addEventListener('DOMContentLoaded', function () {
+    const throttleFFDelaySlider = document.getElementById("throttleFFDelaySlider");
+    const throttleFFDelayValue = document.getElementById("throttleFFDelayValue");
+    const triggerFFDelayInput = document.getElementById("triggerFFDelayInput");
+    const increaseTriggerFFDelay = document.getElementById("increaseTriggerFFDelay");
+    const decreaseTriggerFFDelay = document.getElementById("decreaseTriggerFFDelay");
+
+    // Load initial values from storage
+    chrome.storage.local.get(['throttleFFDelay', 'triggerFFDelay'], function (result) {
+        // console.log(result);
+        if (chrome.runtime.lastError) {
+            console.error("Error retrieving values:", chrome.runtime.lastError);
+        } else {
+            throttleFFDelaySlider.value = result.throttleFFDelay || 100;
+            throttleFFDelayValue.textContent = throttleFFDelaySlider.value;
+            triggerFFDelayInput.value = result.triggerFFDelay || 10;
+        }
+    });
+
+    // Update throttle delay value and save to storage
+    throttleFFDelaySlider.addEventListener('input', function () {
+        throttleFFDelayValue.textContent = throttleFFDelaySlider.value;
+    });
+
+    throttleFFDelaySlider.addEventListener('mouseup', function () {
+        let newValue = parseFloat(throttleFFDelaySlider.value);
+        if (newValue < 10) newValue = 10;
+        if (newValue > 1000) newValue = 1000;
+        chrome.storage.local.set({
+            "throttleFFDelay": newValue
+        }, function () {
+            // Check for errors
+            if (chrome.runtime.lastError) {
+                console.error("Error storing throttle delay:", chrome.runtime.lastError);
+            } else {
+                // console.log("Throttle delay stored successfully!");
+            }
+        });
+        chrome.tabs.query({}, function (tabs) {
+            tabs.forEach(tab => {
+                chrome.tabs.sendMessage(tab.id, { throttleFFDelay: newValue }).catch(error => { });
+            });
+        });
+    });
+
+    // Update trigger delay value and save to storage
+    triggerFFDelayInput.addEventListener('change', function () {
+        let newValue = parseFloat(triggerFFDelayInput.value);
+        if (newValue < 10) newValue = 10;
+        if (newValue > 3000) newValue = 3000;
+        chrome.storage.local.set({
+            "triggerFFDelay": newValue
+        }, function () {
+            // Check for errors
+            if (chrome.runtime.lastError) {
+                console.error("Error storing trigger delay:", chrome.runtime.lastError);
+            } else {
+                // console.log("Trigger delay stored successfully!");
+            }
+        });
+    });
+
+    // Increment trigger delay
+    increaseTriggerFFDelay.addEventListener('mouseup', function () {
+        modifyTriggerFFDelay(10);
+    });
+
+    // // Decrement trigger delay
+    decreaseTriggerFFDelay.addEventListener('mouseup', function () {
+        modifyTriggerFFDelay(-10);
+    });
+
+    triggerFFDelayInput.addEventListener('change', function () {
+        saveTriggerFFDelay();
+    });
+
+    // increaseTriggerFFDelay.addEventListener('mouseup', saveTriggerFFDelay);
+    // decreaseTriggerFFDelay.addEventListener('mouseup', saveTriggerFFDelay);
+
+    // Increment trigger delay
+    function modifyTriggerFFDelay(change) {
+        let newValue = parseFloat(triggerFFDelayInput.value) + change;
+        if (newValue < 10) newValue = 10;
+        if (newValue > 3000) newValue = 3000;
+        triggerFFDelayInput.value = newValue;
+    }
+
+    // Save trigger delay to storage
+    function saveTriggerFFDelay() {
+        let newValue = parseFloat(triggerFFDelayInput.value);
+        if (newValue < 10) {
+            newValue = 10;
+            triggerFFDelayInput.value = newValue;
+        }
+        if (newValue > 3000) {
+            newValue = 3000;
+            triggerFFDelayInput.value = newValue;
+        }
+        chrome.storage.local.set({
+            "triggerFFDelay": newValue
+        }, function () {
+            // Check for errors
+            if (chrome.runtime.lastError) {
+                console.error("Error storing trigger delay:", chrome.runtime.lastError);
+            } else {
+                // console.log("Trigger delay stored successfully!");
+            }
+        });
+        chrome.tabs.query({}, function (tabs) {
+            tabs.forEach(tab => {
+                chrome.tabs.sendMessage(tab.id, { triggerFFDelay: newValue }).catch(error => { });
+            });
+        });
+    }
+
+    // Handle continuous increment/decrement on hold
+    let intervalId;
+    increaseTriggerFFDelay.addEventListener('mousedown', function () {
+        intervalId = setInterval(() => modifyTriggerFFDelay(10), 100);
+    });
+    increaseTriggerFFDelay.addEventListener('mouseup', function () {
+        clearInterval(intervalId);
+        saveTriggerFFDelay();
+    });
+
+    decreaseTriggerFFDelay.addEventListener('mousedown', function () {
+        intervalId = setInterval(() => modifyTriggerFFDelay(-10), 100);
+    });
+    decreaseTriggerFFDelay.addEventListener('mouseup', function () {
+        clearInterval(intervalId);
+        saveTriggerFFDelay();
+    });
+
+});
+
+//
+
+//
+document.addEventListener("DOMContentLoaded", () => {
+    const refreshButton = document.getElementById("refreshButton");
+    if (refreshButton) {
+        refreshButton.addEventListener("click", () => {
+            chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+                chrome.tabs.sendMessage(tabs[0].id, { action: "injectButtons" });
+            });
+        });
     }
 });
 //
@@ -206,14 +353,40 @@ function setDefaultSkipTimes() {
 //
 
 //
+document.addEventListener("DOMContentLoaded", () => {
+    const settingsButton = document.querySelectorAll('.settingsButton')
+    const openSettingsButton = document.getElementById("openSettingsMenu");
+    const closeSettingsMenu = document.getElementById("closeSettingsMenu");
+    const settingsMenu = document.getElementById("settingsMenu");
+
+    settingsButton.forEach(btn => {
+        btn.onclick = () => {
+            const isOpen = settingsMenu.style.display !== "none";
+            if (isOpen) {
+                // Close settings menu
+                settingsMenu.style.display = "none";
+                openSettingsButton.style.display = "block";
+                closeSettingsMenu.style.display = "none";
+            } else {
+                // Open settings menu
+                settingsMenu.style.display = "flex";
+                openSettingsButton.style.display = "none";
+                closeSettingsMenu.style.display = "block";
+            }
+        }
+    })
+});
+//
+
+//
 chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
     const tab = tabs[0];
     const isYoutubePage = tab && tab.url.includes("youtube.com");
     if (isYoutubePage) {
-        chrome.tabs.sendMessage(tab.id, { action: "checkLocalStorage" }, function(response) {
-            if (response && response.BskipTimeFromYouTube && response.FskipTimeFromYouTube) {
-                document.getElementById("BskipTime").value = response.BskipTimeFromYouTube;
-                document.getElementById("FskipTime").value = response.FskipTimeFromYouTube;
+        chrome.tabs.sendMessage(tab.id, { action: "checkLocalStorage" }, function (response) {
+            if (response && response.BskipTime && response.FskipTime) {
+                document.getElementById("BskipTime").value = response.BskipTime;
+                document.getElementById("FskipTime").value = response.FskipTime;
             }
         });
     } else {

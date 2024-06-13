@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "YouTube Fast Forward",
-  "version": "2.0",
+  "version": "2.1",
   "description": "Customizable Buttons to Fast Forward/Backward videos on YouTube.",
   "permissions": [
     "activeTab",

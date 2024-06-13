@@ -29,22 +29,58 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
   let BskipTime = parseFloat(localStorage.getItem("BskipTime")) || 10;
   let FskipTime = parseFloat(localStorage.getItem("FskipTime")) || 10;
   if (message.action === "checkLocalStorage") {
-    sendResponse({ BskipTimeFromYouTube: BskipTime, FskipTimeFromYouTube: FskipTime });
+    sendResponse({ BskipTime: BskipTime, FskipTime: FskipTime });
   }
 });
 
 function injectButtons() {
   const videoPlayer = document.querySelector("video.html5-main-video");
+  if (!videoPlayer) {
+    console.log("Video player not found.");
+    return;
+  }
   let BskipTime = parseFloat(localStorage.getItem("BskipTime")) || 10;
   let FskipTime = parseFloat(localStorage.getItem("FskipTime")) || 10;
+
+  let triggerFFDelay = parseFloat(localStorage.getItem("triggerFFDelay")) || 200;
+  let throttleFFDelay = parseFloat(localStorage.getItem("throttleFFDelay")) || 100;
+
+  if (!localStorage.getItem("throttleFFDelay") || !localStorage.getItem("triggerFFDelay")) {
+    localStorage.setItem("triggerFFDelay", triggerFFDelay);
+    localStorage.setItem("throttleFFDelay", throttleFFDelay);
+    chrome.runtime.sendMessage({ triggerFFDelay: triggerFFDelay, throttleFFDelay: throttleFFDelay }, function (response) {
+      if (chrome.runtime.lastError) {
+        console.error("Error sending message:", chrome.runtime.lastError);
+      } else {
+        // console.log("Message sent: ", response);
+      }
+    });
+  }
 
   if (!localStorage.getItem("BskipTime") || !localStorage.getItem("FskipTime")) {
     localStorage.setItem("BskipTime", BskipTime);
     localStorage.setItem("FskipTime", FskipTime);
-    chrome.runtime.sendMessage({ BskipTimeFromYouTube: BskipTime, FskipTimeFromYouTube: FskipTime }).catch(error => { });
+    chrome.runtime.sendMessage({ BskipTime: BskipTime, FskipTime: FskipTime }, function (response) {
+      if (chrome.runtime.lastError) {
+        console.error("Error sending message:", chrome.runtime.lastError);
+      } else {
+        // console.log("Message sent: ", response);
+      }
+    });
   }
 
   chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
+
+    if (message.triggerFFDelay) {
+      localStorage.setItem("triggerFFDelay", message.triggerFFDelay);
+      triggerFFDelay = message.triggerFFDelay;
+    }
+
+    if (message.throttleFFDelay) {
+      localStorage.setItem("throttleFFDelay", message.throttleFFDelay);
+      throttleFFDelay = message.throttleFFDelay;
+    }
+
     if (message.BskipTime) {
       localStorage.setItem("BskipTime", message.BskipTime);
       BskipTime = message.BskipTime;
@@ -71,10 +107,13 @@ function injectButtons() {
       fSkipIcon.textContent = message.FskipTime;
     }
   });
+  chrome.runtime.sendMessage({ triggerFFDelay: triggerFFDelay, throttleFFDelay: throttleFFDelay }).catch(error => { });
 
-  chrome.runtime.sendMessage({ BskipTimeFromYouTube: BskipTime, FskipTimeFromYouTube: FskipTime }).catch(error => { });
-
+  chrome.runtime.sendMessage({ BskipTime: BskipTime, FskipTime: FskipTime }).catch(error => { });
+  // console.log(videoPlayer);
   if (videoPlayer && !buttonsInjected) {
+    // console.log('player found');
+
     const fastForwardButton = document.createElement("div");
     fastForwardButton.classList.add("ytp-button");
     fastForwardButton.style.display = "flex";
@@ -100,6 +139,10 @@ function injectButtons() {
         fill: white;
         user-select:none;
         ">`+ FskipTime + `</text>
+      <g class="f-seek hidden">
+        <path xmlns="http://www.w3.org/2000/svg" fill="white" d="M21.7,24.3a3.19,3.19,0,0,1,1.64.45l16,9.57a3.2,3.2,0,0,1,0,5.49l-16,9.57a3.18,3.18,0,0,1-1.64.44,3.11,3.11,0,0,1-3.19-3.18V27.49A3.11,3.11,0,0,1,21.7,24.3Z"/>
+        <path xmlns="http://www.w3.org/2000/svg" fill="white" d="M47.53,24.3a3.19,3.19,0,0,1,1.64.45l16,9.57a3.2,3.2,0,0,1,0,5.49l-16,9.57a3.18,3.18,0,0,1-1.64.44,3.12,3.12,0,0,1-3.2-3.18V27.49A3.12,3.12,0,0,1,47.53,24.3Z"/>
+      </g>
       <path class="cls-1" d="M60.88.72,59.44,0V7.61H0V58H14.32V51.56H6.68V13.83H59.44v7.6L80.87,10.72Z"/></g></g>
     </svg>
     `;
@@ -122,6 +165,10 @@ function injectButtons() {
         fill: white;
         user-select:none;
         ">`+ BskipTime + `</text>
+      <g class="b-seek hidden">
+        <path xmlns="http://www.w3.org/2000/svg" fill="white" d="M62.37,27.49V46.64a3.12,3.12,0,0,1-3.2,3.18,3.18,3.18,0,0,1-1.64-.44l-16-9.57a3.2,3.2,0,0,1,0-5.49l16-9.57a3.19,3.19,0,0,1,1.64-.45A3.12,3.12,0,0,1,62.37,27.49Z"/>
+        <path xmlns="http://www.w3.org/2000/svg" fill="white" d="M36.54,27.49V46.64a3.12,3.12,0,0,1-3.2,3.18,3.18,3.18,0,0,1-1.64-.44l-16-9.57a3.2,3.2,0,0,1,0-5.49l16-9.57a3.19,3.19,0,0,1,1.64-.45A3.12,3.12,0,0,1,36.54,27.49Z"/>
+      </g>
       <path class="cls-1" d="M21.43,7.61V0L0,10.72,21.43,21.43v-7.6H74.19V51.56H66.55V58H80.87V7.61Z"></path></g></g>
     </svg>`;
 
@@ -163,20 +210,93 @@ function injectButtons() {
       }
     });
 
+    let mouseDownTimer = null;
+
+    let fSeekVisual, fTextVisual, bSeekVisual, bTextVisual;
+
+    fastForwardButton.addEventListener("mousedown", function () {
+      mouseDownTimer = setTimeout(function () {
+        mouseDownTimer = setInterval(function () {
+          const videoPlayer = document.querySelector("video.html5-main-video");
+          if (videoPlayer) {
+            fSeekVisual = document.querySelector(".f-seek");
+            fTextVisual = document.querySelector(".f-icon-text");
+            if (!isNaN(videoPlayer.duration)) {
+              fSeekVisual.classList.remove("hidden");
+              fTextVisual.classList.add("hidden");
+              videoPlayer.currentTime += FskipTime;
+            }
+            const event = new KeyboardEvent("keydown", {
+              key: "ArrowRight"
+            });
+            document.dispatchEvent(event);
+          }
+        }, throttleFFDelay);
+      }, triggerFFDelay);
+    });
+
+    fastBackwardButtonContainer.addEventListener("mousedown", function () {
+      mouseDownTimer = setTimeout(function () {
+        mouseDownTimer = setInterval(function () {
+          const videoPlayer = document.querySelector("video.html5-main-video");
+          if (videoPlayer) {
+            bSeekVisual = document.querySelector(".b-seek");
+            bTextVisual = document.querySelector(".b-icon-text");
+            if (!isNaN(videoPlayer.duration)) {
+              bSeekVisual.classList.remove("hidden");
+              bTextVisual.classList.add("hidden");
+              videoPlayer.currentTime -= BskipTime;
+            }
+            const event = new KeyboardEvent("keydown", {
+              key: "ArrowLeft"
+            });
+            document.dispatchEvent(event);
+          }
+        }, throttleFFDelay);
+      }, triggerFFDelay);
+    });
+
+    document.addEventListener("mouseup", function () {
+      if (fSeekVisual) {
+        fSeekVisual.classList.add("hidden");
+        fTextVisual.classList.remove("hidden");
+      }
+      if (bSeekVisual) {
+        bSeekVisual.classList.add("hidden");
+        bTextVisual.classList.remove("hidden");
+      }
+
+      clearTimeout(mouseDownTimer);
+      clearInterval(mouseDownTimer);
+    });
+
     buttonsInjected = true;
     console.log("%c[YouTube Fast Forward/Rewind] by REPUDDLE:", "color: limegreen; font-weight: bold;", "Loaded successfully!");
     console.log("%c[YouTube Fast Forward/Rewind] by REPUDDLE:", "color: limegreen; font-weight: bold;", "Thank you for using our extension!");
   }
 }
 
-// injectButtons();
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  // manually inject buttons w/ btn
+  if (message.action === "injectButtons") {
+    injectButtons();
+  }
+});
 
 const observerConfig = {
   childList: true,
   subtree: true
 };
 
-const observer = new MutationObserver((mutationsList, observer) => {
+function debounce(func, wait) {
+  let timeout;
+  return function (...args) {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => func.apply(this, args), wait);
+  };
+}
+
+const observer = new MutationObserver(debounce((mutationsList, observer) => {
   for (const mutation of mutationsList) {
     if (mutation.type === "childList" && mutation.addedNodes.length > 0) {
       const videoPlayer = document.querySelector("video.html5-main-video");
@@ -187,6 +307,6 @@ const observer = new MutationObserver((mutationsList, observer) => {
       }
     }
   }
-});
+}, 150));
 
 observer.observe(document, observerConfig);

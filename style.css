@@ -18,6 +18,17 @@ html::-webkit-scrollbar {
     display: none;
 }
 
+br {
+    user-select: none;
+}
+
+.header {
+    background: radial-gradient(#de0606, #750000d6);
+    width: 100%;
+    height: auto;
+    border-bottom: 1px solid #3f484a;
+}
+
 .hidden {
     display: none;
 }
@@ -97,7 +108,7 @@ input[type=number]::-webkit-outer-spin-button {
 .skip-btns {
     display: flex;
     justify-content: center;
-    padding: 8px;
+    padding-bottom: 8px;
     text-align: center;
     font-size: 12pt;
 }
@@ -120,15 +131,16 @@ input[type=number]::-webkit-outer-spin-button {
     text-transform: uppercase;
 }
 
-form {
+.setting-body {
     /* background: linear-gradient(45deg, #f5b3b333, #d9bbef45); */
     /* background: #121314; */
     background: linear-gradient(360deg, #000000, #2e0101);
     padding-bottom: 10px;
+    padding-top: 15px;
     position: relative;
 }
 
-form.not-on-youtube {
+.not-on-youtube {
     pointer-events: none;
     user-select: none;
 }
@@ -150,7 +162,7 @@ form button {
     position: absolute;
     background-color: rgba(0, 0, 0, 0.7);
     color: black;
-    z-index: 1;
+    z-index: 9;
 }
 
 .overlay {
@@ -324,4 +336,131 @@ form button {
 .star.hovered {
     color: #ffdf00 !important;
     text-decoration: none;
+}
+
+#refreshButton {
+    position: absolute;
+    top: 6px;
+    left: 8px;
+    padding: 0;
+    fill: #dfdfdf;
+    background: transparent;
+    border: none;
+    z-index: 1;
+}
+
+#refreshButton,
+.settingsButton {
+    cursor: pointer;
+    opacity: .45;
+    transition: .3s ease;
+}
+
+#refreshButton:hover,
+.settingsButton:hover {
+    opacity: 1;
+}
+
+#refreshButton:hover:before {
+    content: 'manually inject buttons';
+    color: white;
+    position: absolute;
+    left: 130%;
+    top: 0px;
+    white-space: nowrap;
+    font-size: 10pt;
+}
+
+#openSettingsMenu:hover:before {
+    content: 'options';
+    color: white;
+    position: absolute;
+    right: 120%;
+    top: -1px;
+    white-space: nowrap;
+    font-size: 10pt;
+}
+
+#closeSettingsMenu:hover:before {
+    content: 'close';
+    color: white;
+    position: absolute;
+    right: 120%;
+    top: -1px;
+    white-space: nowrap;
+    font-size: 10pt;
+}
+
+.settings-menu {
+    position: absolute;
+    top: 6px;
+    right: 8px;
+    z-index: 2;
+}
+
+#settingsMenu {
+    position: absolute;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background: #000000d6;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+.settingsMenuInner {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    width: 263px;
+    max-width: 263px;
+    white-space: nowrap;
+    margin-top: 25px;
+}
+
+.settingsMenuInner p {
+    margin: 5px 0;
+    color: gray;
+}
+
+.control-group {
+    accent-color: rgb(209, 13, 13);
+}
+
+.control-group {
+    display: flex;
+    align-items: center;
+    user-select: none;
+}
+
+.control-group button {
+    background: rgb(209, 13, 13);
+    border: none;
+    color: white;
+    margin-left: 5px;
+    width: 20px;
+    height: 20px;
+}
+
+.control-group button:hover {
+    background: rgb(184, 10, 10);
+}
+
+.control-group button:active {
+    background: rgb(216, 18, 18);
+}
+
+.control-group input::-webkit-outer-spin-button,
+.control-group input::-webkit-inner-spin-button {
+    display: none;
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+.control-group input[type=number] {
+    -moz-appearance: textfield;
 }
