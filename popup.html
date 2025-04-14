@@ -7,7 +7,7 @@
 </head>
 
 <body>
-    <span class="version">v2.1</span>
+    <span class="version">v2.2</span>
     <div class="header">
         <h2 style="display: flex;margin: 0;padding: 7px;justify-content: center;">
             <img src="images/ff_header.svg" height="45">
@@ -96,7 +96,13 @@
                     </div>
                     <p>Set the delay between each seek through event.</p>
                 </div>
-
+              
+                <div>
+                    <div class="control-group">
+                        <label for="mapArrowKeys">Map skipping time to the arrow keys:</label>
+                        <input type="checkbox" name="mapArrowKeys" id="mapArrowKeys">
+                    </div>
+                </div>
             </div>
         </div>
         <form id="skipTimeForm">
@@ -114,9 +120,7 @@
             </div>
             <button type="submit" id="status" class="dim-hvr">Save Changes</button>
         </form>
-    </div>
-
-    <div class="expand-wrap">
+           <div class="expand-wrap">
         <span id="expand-btn">
             <svg class="expand-svg" width="22px" height="16px" viewBox="0 0 24 24" fill="none"
                 xmlns="http://www.w3.org/2000/svg" transform="rotate(-90)">
@@ -130,6 +134,9 @@
             <span class="show-text">Show</span>links
         </span>
     </div>
+    </div>
+
+ 
     <div class="expand-div">
         <div style="padding:10px;background: #e1e1e15c;">
             <!-- <h1>Thank you for using my extension!</h1> -->

@@ -195,17 +195,41 @@ document.addEventListener('DOMContentLoaded', function () {
     const triggerFFDelayInput = document.getElementById("triggerFFDelayInput");
     const increaseTriggerFFDelay = document.getElementById("increaseTriggerFFDelay");
     const decreaseTriggerFFDelay = document.getElementById("decreaseTriggerFFDelay");
+    const mapArrowKeysCheckbox = document.getElementById("mapArrowKeys");
 
     // Load initial values from storage
-    chrome.storage.local.get(['throttleFFDelay', 'triggerFFDelay'], function (result) {
-        // console.log(result);
+    chrome.storage.local.get(['throttleFFDelay', 'triggerFFDelay', 'mapArrowKeys'], function (result) {
         if (chrome.runtime.lastError) {
             console.error("Error retrieving values:", chrome.runtime.lastError);
         } else {
             throttleFFDelaySlider.value = result.throttleFFDelay || 100;
             throttleFFDelayValue.textContent = throttleFFDelaySlider.value;
             triggerFFDelayInput.value = result.triggerFFDelay || 10;
+            mapArrowKeysCheckbox.checked = result.mapArrowKeys || 0;
         }
+    });
+
+    mapArrowKeysCheckbox.addEventListener("change", (event) => {
+        let isChecked = event.target.checked ? 1 : 0;
+
+        chrome.storage.local.set({
+            "mapArrowKeys": isChecked
+        }, function () {
+            // Check for errors
+            if (chrome.runtime.lastError) {
+                console.error("Error mapping arrow keys:", chrome.runtime.lastError);
+            } else {
+                // console.log("Throttle delay stored successfully!");
+            }
+        });
+
+        chrome.tabs.query({}, function (tabs) {
+            tabs.forEach(tab => {
+                chrome.tabs.sendMessage(tab.id, { mapArrowKeys: isChecked }).catch(error => { });
+            });
+        });
+
+        // console.log("Mapping status:", isChecked);
     });
 
     // Update throttle delay value and save to storage
@@ -220,7 +244,6 @@ document.addEventListener('DOMContentLoaded', function () {
         chrome.storage.local.set({
             "throttleFFDelay": newValue
         }, function () {
-            // Check for errors
             if (chrome.runtime.lastError) {
                 console.error("Error storing throttle delay:", chrome.runtime.lastError);
             } else {
@@ -242,7 +265,6 @@ document.addEventListener('DOMContentLoaded', function () {
         chrome.storage.local.set({
             "triggerFFDelay": newValue
         }, function () {
-            // Check for errors
             if (chrome.runtime.lastError) {
                 console.error("Error storing trigger delay:", chrome.runtime.lastError);
             } else {

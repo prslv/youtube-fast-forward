@@ -6,7 +6,7 @@ chrome.runtime.onInstalled.addListener(function (details) {
 });
 
 chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
-    if (message.BskipTime || message.FskipTime || message.triggerFFDelay || message.throttleFFDelay) {
+    if (message.mapArrowKeys || message.BskipTime || message.FskipTime || message.triggerFFDelay || message.throttleFFDelay) {
         chrome.storage.local.set(message, function () {
             if (chrome.runtime.lastError) {
                 console.error("Error storing values:", chrome.runtime.lastError);

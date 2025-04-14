@@ -28,8 +28,9 @@ let buttonsInjected = false;
 chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
   let BskipTime = parseFloat(localStorage.getItem("BskipTime")) || 10;
   let FskipTime = parseFloat(localStorage.getItem("FskipTime")) || 10;
+  let mapArrowKeys = parseFloat(localStorage.getItem("mapArrowKeys")) || 0;
   if (message.action === "checkLocalStorage") {
-    sendResponse({ BskipTime: BskipTime, FskipTime: FskipTime });
+    sendResponse({ BskipTime: BskipTime, FskipTime: FskipTime, mapArrowKeys: mapArrowKeys });
   }
 });
 
@@ -42,13 +43,15 @@ function injectButtons() {
   let BskipTime = parseFloat(localStorage.getItem("BskipTime")) || 10;
   let FskipTime = parseFloat(localStorage.getItem("FskipTime")) || 10;
 
+  let mapArrowKeys = parseFloat(localStorage.getItem("mapArrowKeys")) || 0;
   let triggerFFDelay = parseFloat(localStorage.getItem("triggerFFDelay")) || 200;
   let throttleFFDelay = parseFloat(localStorage.getItem("throttleFFDelay")) || 100;
 
-  if (!localStorage.getItem("throttleFFDelay") || !localStorage.getItem("triggerFFDelay")) {
+  if (!localStorage.getItem("mapArrowKeys") || !localStorage.getItem("throttleFFDelay") || !localStorage.getItem("triggerFFDelay")) {
     localStorage.setItem("triggerFFDelay", triggerFFDelay);
     localStorage.setItem("throttleFFDelay", throttleFFDelay);
-    chrome.runtime.sendMessage({ triggerFFDelay: triggerFFDelay, throttleFFDelay: throttleFFDelay }, function (response) {
+    localStorage.setItem("mapArrowKeys", mapArrowKeys);
+    chrome.runtime.sendMessage({ mapArrowKeys: mapArrowKeys, triggerFFDelay: triggerFFDelay, throttleFFDelay: throttleFFDelay }, function (response) {
       if (chrome.runtime.lastError) {
         console.error("Error sending message:", chrome.runtime.lastError);
       } else {
@@ -74,6 +77,11 @@ function injectButtons() {
     if (message.triggerFFDelay) {
       localStorage.setItem("triggerFFDelay", message.triggerFFDelay);
       triggerFFDelay = message.triggerFFDelay;
+    }
+if (message.mapArrowKeys !== undefined) {
+        // Explicitly set and log the mapArrowKeys state
+        localStorage.setItem("mapArrowKeys", message.mapArrowKeys);
+        mapArrowKeys = message.mapArrowKeys;
     }
 
     if (message.throttleFFDelay) {
@@ -107,7 +115,7 @@ function injectButtons() {
       fSkipIcon.textContent = message.FskipTime;
     }
   });
-  chrome.runtime.sendMessage({ triggerFFDelay: triggerFFDelay, throttleFFDelay: throttleFFDelay }).catch(error => { });
+  chrome.runtime.sendMessage({ mapArrowKeys: mapArrowKeys, triggerFFDelay: triggerFFDelay, throttleFFDelay: throttleFFDelay }).catch(error => { });
 
   chrome.runtime.sendMessage({ BskipTime: BskipTime, FskipTime: FskipTime }).catch(error => { });
   // console.log(videoPlayer);
@@ -196,6 +204,25 @@ function injectButtons() {
         document.dispatchEvent(event);
       }
     });
+
+    document.addEventListener("keydown", function (event) {
+      const videoPlayer = document.querySelector("video.html5-main-video");
+
+      if (!videoPlayer || mapArrowKeys == 0) return;
+      
+      switch (event.key) {
+        case "ArrowRight":
+          event.preventDefault();
+          event.stopImmediatePropagation();
+          videoPlayer.currentTime += FskipTime;
+          break;
+        case "ArrowLeft":
+          event.preventDefault();
+          event.stopImmediatePropagation();
+          videoPlayer.currentTime -= BskipTime;
+          break;
+      }
+    }, true); // Use the "true" parameter to ensure the event listener is in the capture phase
 
     fastBackwardButtonContainer.addEventListener("click", function () {
       const videoPlayer = document.querySelector("video.html5-main-video");

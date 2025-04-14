@@ -135,7 +135,6 @@ input[type=number]::-webkit-outer-spin-button {
     /* background: linear-gradient(45deg, #f5b3b333, #d9bbef45); */
     /* background: #121314; */
     background: linear-gradient(360deg, #000000, #2e0101);
-    padding-bottom: 10px;
     padding-top: 15px;
     position: relative;
 }
@@ -294,6 +293,8 @@ form button {
 
 #expand-btn {
     width: 75px;
+    margin-top: 12px;
+    margin-bottom: 5px;
 }
 
 .expand-div {
@@ -418,7 +419,6 @@ form button {
     width: 263px;
     max-width: 263px;
     white-space: nowrap;
-    margin-top: 25px;
 }
 
 .settingsMenuInner p {
