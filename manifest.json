@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "YouTube Fast Forward",
-  "version": "2.2",
+  "version": "2.5",
   "description": "Customizable Buttons to Skip Forward/Rewind and Seek Through videos on YouTube.",
   "permissions": [
     "activeTab",
@@ -33,7 +33,7 @@
   ],
   "web_accessible_resources": [
     {
-      "resources": ["*.js", "*.css", "https://repuddle.com/extensions/updates/latest/youtube-fast-forward"],
+      "resources": ["*.js", "*.css", "https://repuddle.com/extensions/updates/latest/youtube-fast-forward", "https://repuddle.com/announcement/6", "https://prslv.github.io/"],
       "matches": ["<all_urls>"]
     }
   ],

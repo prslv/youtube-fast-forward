@@ -7,7 +7,7 @@
 </head>
 
 <body>
-    <span class="version">v2.2</span>
+    <span class="currentVersion" id="showWhatsNewPromptBtn"></span>
     <div class="header">
         <h2 style="display: flex;margin: 0;padding: 7px;justify-content: center;">
             <img src="images/ff_header.svg" height="45">
@@ -39,6 +39,7 @@
                 </g>
             </svg>
         </button>
+
         <div class="settings-menu">
             <div id="openSettingsMenu" class="settingsButton">
                 <svg width="20px" height="20px" viewBox="-0.5 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -74,6 +75,32 @@
                 </svg>
             </div>
         </div>
+        <div class="reportIssueWrap">
+            <div class="reportIssuePrompt" id="reportIssuePrompt">
+                Please send details about your problem to <strong>kunovpreslav@gmail.com</strong>, describe what is
+                wrong and when it occured (e.g. if it was after a browser/windows update). Please attach a screenshot if
+                it is a visual bug, and include which browser you are using.
+            </div>
+            <div class="reportIssue" id="reportIssueBtn">
+                <svg width="14" height="14" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000">
+                    <g id="" stroke-width="0"></g>
+                    <g id="" stroke-linecap="round" stroke-linejoin="round"></g>
+                    <g id="">
+                        <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                            <g id="Dribbble-Light-Preview" transform="translate(-220.000000, -4519.000000)"
+                                fill="#dfdfdf">
+                                <g id="icons" transform="translate(56.000000, 160.000000)">
+                                    <path
+                                        d="M178,4363 C178,4361.895 177.105,4361 176,4361 L172,4361 C170.895,4361 170,4361.895 170,4363 L170,4365 L170,4368 L170,4370 L170,4373 L170,4375 C170,4376.105 170.895,4377 172,4377 L176,4377 C177.105,4377 178,4376.105 178,4375 L178,4373 L178,4370 L178,4368 L178,4365 L178,4363 Z M180,4365 L180,4368 L183,4368 C183.552,4368 184,4368.448 184,4369 C184,4369.552 183.552,4370 183,4370 L180,4370 L180,4373 C182.209,4373 184,4374.791 184,4377 L184,4378 C184,4378.552 183.552,4379 183,4379 C182.448,4379 182,4378.552 182,4378 L182,4377 C182,4375.895 181.105,4375 180,4375 C180,4377.209 178.209,4379 176,4379 L172,4379 C169.791,4379 168,4377.209 168,4375 C166.895,4375 166,4375.895 166,4377 L166,4378 C166,4378.552 165.552,4379 165,4379 C164.448,4379 164,4378.552 164,4378 L164,4377 C164,4374.791 165.791,4373 168,4373 L168,4370 L165,4370 C164.448,4370 164,4369.552 164,4369 C164,4368.448 164.448,4368 165,4368 L168,4368 L168,4365 C165.791,4365 164,4363.209 164,4361 L164,4360 C164,4359.448 164.448,4359 165,4359 C165.552,4359 166,4359.448 166,4360 L166,4361 C166,4362.105 166.895,4363 168,4363 C168,4360.791 169.791,4359 172,4359 L176,4359 C178.209,4359 180,4360.791 180,4363 C181.105,4363 182,4362.105 182,4361 L182,4360 C182,4359.448 182.448,4359 183,4359 C183.552,4359 184,4359.448 184,4360 L184,4361 C184,4363.209 182.209,4365 180,4365 L180,4365 Z M176,4373 C175.448,4373 175,4373.448 175,4374 C175,4374.552 175.448,4375 176,4375 C176.552,4375 177,4374.552 177,4374 C177,4373.448 176.552,4373 176,4373 L176,4373 Z M173,4374 C173,4374.552 172.552,4375 172,4375 C171.448,4375 171,4374.552 171,4374 C171,4373.448 171.448,4373 172,4373 C172.552,4373 173,4373.448 173,4374 L173,4374 Z"
+                                        id="bug_spider-[#878787]"> </path>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </svg>&nbsp; Report an issue
+            </div>
+        </div>
         <div id="settingsMenu" style="display: none;color:white">
             <div class="settingsMenuInner">
                 <div>
@@ -96,17 +123,45 @@
                     </div>
                     <p>Set the delay between each seek through event.</p>
                 </div>
-              
+
                 <div>
                     <div class="control-group">
-                        <label for="mapArrowKeys">Map skipping time to the arrow keys:</label>
+                        <label for="mapArrowKeys">Map skipping time to keyboard (arrow) keys:</label>
                         <input type="checkbox" name="mapArrowKeys" id="mapArrowKeys">
                     </div>
                 </div>
+                <div>
+                    <div class="control-group">
+                        <label for="buttonsPosition">Inject buttons outside the player</label>
+                        <input type="checkbox" name="buttonsPosition" id="buttonsPosition">
+                    </div>
+                </div>
+                <!-- <div> Coming soon
+                    <div class="control-group">
+                        <label for="positionButtons">Set preferred buttons position:</label>
+                        
+                    </div>
+                    <select name="positionButtons" id="">
+                        <option value="1">
+                            After time
+                        </option>
+                        <option value="2">
+                            Before time
+                        </option>
+                        <option value="3">
+                            Before volume
+                        </option>
+                        <option value="4">
+                            After play/pause
+                        </option>
+                        <option value="5">
+                            Before and after play/pause
+                        </option>
+                    </select>
+                </div> -->
             </div>
         </div>
         <form id="skipTimeForm">
-            <br>
             <div class="skip-btns">
                 <div class="set-backward">
                     <label for="BskipTime">Backward</label>
@@ -120,23 +175,56 @@
             </div>
             <button type="submit" id="status" class="dim-hvr">Save Changes</button>
         </form>
-           <div class="expand-wrap">
-        <span id="expand-btn">
-            <svg class="expand-svg" width="22px" height="16px" viewBox="0 0 24 24" fill="none"
-                xmlns="http://www.w3.org/2000/svg" transform="rotate(-90)">
-                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                <g id="SVGRepo_iconCarrier">
-                    <path d="M15 6L9 12L15 18" stroke="grey" stroke-width="2" stroke-linecap="round"
-                        stroke-linejoin="round"></path>
-                </g>
-            </svg>
-            <span class="show-text">Show</span>links
-        </span>
-    </div>
+        <div id="WhatsNewPrompt"
+            style="position: relative;color:rgb(201, 201, 201);margin: 31px;padding: 15px;background: #c9eefa30;border-radius: 10px;margin-top: 0;">
+            <div id="closeWhatsNewPromptBtn">
+                <svg width="18px" height="18px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                    <g id="SVGRepo_iconCarrier">
+                        <path
+                            d="M20.7457 3.32851C20.3552 2.93798 19.722 2.93798 19.3315 3.32851L12.0371 10.6229L4.74275 3.32851C4.35223 2.93798 3.71906 2.93798 3.32854 3.32851C2.93801 3.71903 2.93801 4.3522 3.32854 4.74272L10.6229 12.0371L3.32856 19.3314C2.93803 19.722 2.93803 20.3551 3.32856 20.7457C3.71908 21.1362 4.35225 21.1362 4.74277 20.7457L12.0371 13.4513L19.3315 20.7457C19.722 21.1362 20.3552 21.1362 20.7457 20.7457C21.1362 20.3551 21.1362 19.722 20.7457 19.3315L13.4513 12.0371L20.7457 4.74272C21.1362 4.3522 21.1362 3.71903 20.7457 3.32851Z"
+                            fill="#dfdfdf"></path>
+                    </g>
+                </svg>
+            </div>
+
+            <p style="
+                color: wheat;
+                font-size: 10pt;
+                margin-top: 0;
+            ">(<span class="currentVersion"></span>) What's new:</p>
+            <ul style="padding-left:1rem;">
+                <li>Added (right) padding to the button element to separate it from the chapter button;</li>
+            </ul>
+            <ul style="padding-left:1rem;margin-top: 5px;">
+                <li><strong>Temporary fix for always on player bug:</strong> YouTube is gradually pushing UI updates of
+                    the player to different regions. This means the extension might break for a small part of you, and I
+                    will be able to fix that only after the update propagates to my region.</li>
+                <p style="margin:0;margin-top:5px">The current issue caused by a recent update makes the button visibly
+                    pinned to the video player after your mouse leaves it and the player controls disappear.</p>
+                <p style="margin:0;margin-top:5px">I have added the option to change the placement of the buttons
+                    outside the player as a temporary fix. Enable it by clicking on the options icon top-right.</p>
+            </ul>
+        </div>
+        <div class="expand-wrap">
+            <span id="expand-btn">
+                <svg class="expand-svg" width="22px" height="16px" viewBox="0 0 24 24" fill="none"
+                    xmlns="http://www.w3.org/2000/svg" transform="rotate(-90)">
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                    <g id="SVGRepo_iconCarrier">
+                        <path d="M15 6L9 12L15 18" stroke="grey" stroke-width="2" stroke-linecap="round"
+                            stroke-linejoin="round"></path>
+                    </g>
+                </svg>
+                <span class="show-text">Show</span>links
+            </span>
+        </div>
+
     </div>
 
- 
+
     <div class="expand-div">
         <div style="padding:10px;background: #e1e1e15c;">
             <!-- <h1>Thank you for using my extension!</h1> -->
@@ -245,7 +333,7 @@
                     Github
                 </a>
 
-                <a class="single" href="https://repuddle.com" target="_blank">
+                <a class="single" href="https://repuddle.com?href=youtube-fast-forward-extension-panel" target="_blank">
                     <p class="show">
                         <span>repuddle.com
                             <svg style="margin-left: -1px;" fill="white" xmlns="http://www.w3.org/2000/svg" width="20px"
@@ -287,19 +375,6 @@
                                 </path>
                                 <path class="cls-2"
                                     d="M26.51,64.68C21.86,59,0,62.61,0,62.61V77.85H27.5S28.83,67.5,26.51,64.68Z"></path>
-                                <g xmlns="http://www.w3.org/2000/svg" style="opacity:.8;">
-                                    <path
-                                        d="M76.38,68A12.44,12.44,0,0,1,77,63.64a5.15,5.15,0,0,1,1.85-2.51,5.48,5.48,0,0,1,5.6-.08,5,5,0,0,1,1.76,1.85,5.25,5.25,0,0,1,.7,2.27,7,7,0,0,1,.55-2.48,5,5,0,0,1,1.65-2.14,5,5,0,0,1,3-.86,6.23,6.23,0,0,1,3.21.82,5.62,5.62,0,0,1,2.23,2.64A12.11,12.11,0,0,1,98.42,68v9.84h-22Zm10.21,4.86-1.3,1.75v-5a4.93,4.93,0,0,0-.76-3,2.43,2.43,0,0,0-2-1,2.29,2.29,0,0,0-1.43.43,2.48,2.48,0,0,0-.82,1.25A6.77,6.77,0,0,0,80,69.3v5.88l-2.21-2.37ZM94.82,69A4.66,4.66,0,0,0,94,66.08a2.55,2.55,0,0,0-2.12-1,2.81,2.81,0,0,0-1.33.3,2.47,2.47,0,0,0-1,.84,3.84,3.84,0,0,0-.58,1.31,6.57,6.57,0,0,0-.21,1.71v5.33l-1.28-1.75H97l-2.21,2.37Z"
-                                        fill="#8c8c8c"></path>
-                                    <path
-                                        d="M80,53.17,77.76,50.8h9.13L85.57,52V42.75h3.59V52L87.84,50.8h9.21l-2.22,2.37V40.87h3.59V56.09h-22V40.87H80Z"
-                                        fill="#8c8c8c"></path>
-                                    <path d="M80,20.11v8.27l-2.21-2.11H98.42v5.25H77.76L80,29.34v8.32H76.38V20.11Z"
-                                        fill="#8c8c8c"></path>
-                                    <path
-                                        d="M98.42,20.79,76.35,14.54V6.21L98.42,0V5.4l-19.24,5v0l19.24,5Zm-5.11-4.48H89.69V4.43h3.62Z"
-                                        fill="#8c8c8c"></path>
-                                </g>
                             </g>
                         </g>
                     </svg>

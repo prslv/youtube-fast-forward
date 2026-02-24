@@ -23,23 +23,37 @@ br {
 }
 
 .header {
-    background: radial-gradient(#de0606, #750000d6);
+    background: #240000;;
     width: 100%;
     height: auto;
-    border-bottom: 1px solid #3f484a;
+    border-bottom: 1px solid #2c1715;
 }
 
 .hidden {
     display: none;
 }
 
-.version {
+#closeWhatsNewPromptBtn {
+    display: flex;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    padding: 10px;
+    border-radius: 7px;
+    align-items: center;
+}
+#closeWhatsNewPromptBtn:hover {
+    background: #ffffff21;
+    cursor: pointer;
+}
+#showWhatsNewPromptBtn {
     position: absolute;
     color: #ffffff4a;
     right: 4px;
+    cursor: pointer;
 }
 
-.version:hover {
+#showWhatsNewPromptBtn:hover {
     color: gainsboro;
 }
 
@@ -61,7 +75,7 @@ br {
 }
 
 .dim-hvr:hover {
-    background-color: red;
+    background-color: rgb(129, 0, 0);
 }
 
 .set-forward input,
@@ -130,13 +144,20 @@ input[type=number]::-webkit-outer-spin-button {
     justify-content: center;
     text-transform: uppercase;
 }
+#skipTimeForm {
+    padding: 40px 0;
 
+}
 .setting-body {
     /* background: linear-gradient(45deg, #f5b3b333, #d9bbef45); */
     /* background: #121314; */
-    background: linear-gradient(360deg, #000000, #2e0101);
-    padding-top: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background: linear-gradient(360deg, #100000, #140000);
     position: relative;
+    min-height:220px;
 }
 
 .not-on-youtube {
@@ -146,11 +167,11 @@ input[type=number]::-webkit-outer-spin-button {
 
 form button {
     display: block;
-    background: #e00606ef;
+    background: #410000ef;
     color: white;
     font-size: 13pt;
     font-weight: bold;
-    padding: 6px 74px;
+    padding: 12px 74px;
     border-radius: 7px;
     border: none;
     cursor: pointer;
@@ -266,9 +287,11 @@ form button {
 
 .expand-wrap {
     display: flex;
-    background: black;
     color: grey;
     justify-content: flex-end;
+    position: absolute;
+    bottom: 0;
+    right: 0;
 }
 
 .expand-wrap span {
@@ -339,6 +362,40 @@ form button {
     text-decoration: none;
 }
 
+.reportIssueWrap {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    font-size: 10pt;
+    z-index: 1;
+}
+
+.reportIssuePrompt {
+    display: none;
+    color: white;
+    background: black;
+    padding: 12px;
+    border-top: 1px solid red;
+}
+
+.reportIssueWrap:hover {
+    background-color: black;
+}
+
+.reportIssueWrap:hover .reportIssuePrompt {
+    display: block;
+}
+
+.reportIssue {
+    display: flex;
+    align-items: center;
+    color: #dfdfdf !important;
+    padding-left: 8px;
+    cursor: default !important;
+    padding-bottom: 6px;
+    text-decoration: none !important;
+}
+
 #refreshButton {
     position: absolute;
     top: 6px;
@@ -351,14 +408,16 @@ form button {
 }
 
 #refreshButton,
-.settingsButton {
+.settingsButton,
+.reportIssue {
     cursor: pointer;
     opacity: .45;
     transition: .3s ease;
 }
 
 #refreshButton:hover,
-.settingsButton:hover {
+.settingsButton:hover,
+.reportIssueWrap:hover .reportIssue {
     opacity: 1;
 }
 
@@ -410,6 +469,7 @@ form button {
     top: 0;
     left: 0;
     z-index: 1;
+    /* overflow-y: scroll; */
 }
 
 .settingsMenuInner {
@@ -419,6 +479,8 @@ form button {
     width: 263px;
     max-width: 263px;
     white-space: nowrap;
+    /* margin-top: 50px;
+    padding: 30px 0; */
 }
 
 .settingsMenuInner p {

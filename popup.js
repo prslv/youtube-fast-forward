@@ -59,6 +59,49 @@ supBtn.addEventListener("click", () => {
 //
 
 //
+const reportIssueBtn = document.getElementById("reportIssueBtn");
+const reportIssuePrompt = document.getElementById("reportIssuePrompt");
+
+reportIssueBtn.addEventListener("click", () => {
+    reportIssuePrompt.classList.toggle("hidden");
+});
+
+//
+
+//
+const CURRENT_VERSION = chrome.runtime.getManifest().version;
+const statusKey = "WhatsNewPromptStatus_" + CURRENT_VERSION;
+const WhatsNewPrompt = document.getElementById("WhatsNewPrompt");
+const WhatsNewPromptStatus = localStorage.getItem(statusKey);
+
+if (WhatsNewPromptStatus === null || WhatsNewPromptStatus === "") {
+  localStorage.setItem(statusKey, "show");
+}
+if (WhatsNewPromptStatus === "hide") {
+  WhatsNewPrompt.classList.add("hidden");
+} else {
+  WhatsNewPrompt.classList.remove("hidden");
+}
+
+const closeWhatsNewPromptBtn = document.getElementById("closeWhatsNewPromptBtn");
+closeWhatsNewPromptBtn.addEventListener("click", () => {
+  WhatsNewPrompt.classList.add("hidden");
+  localStorage.setItem(statusKey, "hide");
+});
+
+const showWhatsNewPromptBtn = document.getElementById("showWhatsNewPromptBtn");
+showWhatsNewPromptBtn.addEventListener("click", () => {
+  WhatsNewPrompt.classList.remove("hidden");
+  localStorage.setItem(statusKey, "show");
+});
+
+const currentVersionDisplay = document.querySelectorAll(".currentVersion");
+currentVersionDisplay.forEach((e) => {
+    e.innerText = "v" + chrome.runtime.getManifest().version;
+})
+//
+
+//
 const stars = document.querySelectorAll('.star');
 function setRating(value) {
     localStorage.setItem('userRating', value);
@@ -196,9 +239,10 @@ document.addEventListener('DOMContentLoaded', function () {
     const increaseTriggerFFDelay = document.getElementById("increaseTriggerFFDelay");
     const decreaseTriggerFFDelay = document.getElementById("decreaseTriggerFFDelay");
     const mapArrowKeysCheckbox = document.getElementById("mapArrowKeys");
+    const buttonsPositionCheckbox = document.getElementById("buttonsPosition");
 
     // Load initial values from storage
-    chrome.storage.local.get(['throttleFFDelay', 'triggerFFDelay', 'mapArrowKeys'], function (result) {
+    chrome.storage.local.get(['throttleFFDelay', 'triggerFFDelay', 'mapArrowKeys', 'buttonsPosition'], function (result) {
         if (chrome.runtime.lastError) {
             console.error("Error retrieving values:", chrome.runtime.lastError);
         } else {
@@ -206,7 +250,26 @@ document.addEventListener('DOMContentLoaded', function () {
             throttleFFDelayValue.textContent = throttleFFDelaySlider.value;
             triggerFFDelayInput.value = result.triggerFFDelay || 10;
             mapArrowKeysCheckbox.checked = result.mapArrowKeys || 0;
+            buttonsPositionCheckbox.checked = result.buttonsPosition || 0;
         }
+    });
+    buttonsPositionCheckbox.addEventListener("change", (event) => {
+        let isChecked = event.target.checked ? 1 : 0;
+        chrome.storage.local.set({
+            "buttonsPosition": isChecked
+        }, function() {
+            if(chrome.runtime.lastError) {
+                console.error("Error changing buttons position:", chrome.runtime.lastError);
+            } else {
+                // console.log("buttons position changed.");
+            }
+        });
+
+        chrome.tabs.query({}, function(tabs) {
+            tabs.forEach(tab => {
+                chrome.tabs.sendMessage(tab.id, { buttonsPosition: isChecked}).catch(error => {});
+            });
+        });
     });
 
     mapArrowKeysCheckbox.addEventListener("change", (event) => {
